@@ -60,18 +60,6 @@ parameters:
       - allowed_pattern: "[a-zA-Z0-9]+"
         description:
           Password must consist of characters and numbers only.
-  TraineePassword:
-    type: string
-    label: Trainee Password
-    description: Password of the local trainee user
-    hidden: True 
-    constraints:
-      - length: { min: 8, max: 12 }
-        description:
-          Password length must be between 8 and 12 characters.
-      - allowed_pattern: "[a-zA-Z0-9]+"
-        description:
-          Password must consist of characters and numbers only.
   
 resources:
   ngs_security_group:
@@ -104,19 +92,14 @@ resources:
             echo "Bootstrapping NGS Instance ..."
             echo "Setting password for ubuntu user ..."
             echo -e "ubuntu:$ubuntu_password" | chpasswd
-            echo "Adding trainee user ..."
-            useradd --create-home --shell /bin/bash trainee
-            echo "Setting password for trainee user ..."
-            echo -e "trainee:$trainee_password" | chpasswd
             echo "Download relevant datasets, tools from NeCTAR Object Storage ..."
             cd /tmp/
-            wget https://raw.githubusercontent.com/BPA-CSIRO-Workshops/heat-templates/master/scripts/workshop_ngs_setup.sh
+            wget https://raw.githubusercontent.com/BPA-CSIRO-Workshops/heat-templates/master/scripts/standard_ngs_setup.sh
             bash workshop_ngs_setup.sh
             echo "Installing required packages ..."
             apt-get install freenx-server -y            
           params:
             $ubuntu_password: { get_param: UbuntuPassword } 
-            $trainee_password: { get_param: TraineePassword } 
 
 outputs:
   instance_ip:

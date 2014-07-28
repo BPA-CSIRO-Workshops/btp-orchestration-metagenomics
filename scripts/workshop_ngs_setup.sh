@@ -86,13 +86,6 @@ if [ ! -e "$top_dir/$working_dir/$module_dir" ]; then
   ln -s $top_dir/$data_sub_dir/good_example.fastq
 
   # make tutorial paths sync with shorter paths used used in tutorials
-  if [[ ! -e /home/$sudoer_user/QC ]]; then
-    su $sudoer_user -c "ln -s $top_dir/$working_dir/$module_dir /home/$sudoer_user/QC"
-  fi
-  if [[ ! -e /home/$sudoer_user/Desktop/QC ]]; then
-    su $sudoer_user -c "ln -s $top_dir/$working_dir/$module_dir /home/$sudoer_user/Desktop/QC"
-  fi
-
   if [[ ! -e /home/$trainee_user/QC ]]; then
     su $trainee_user -c "ln -s $top_dir/$working_dir/$module_dir /home/$trainee_user/QC"
   fi
@@ -105,7 +98,7 @@ fi
 # last thing to run for this module
 if [ $(stat -c %U "$top_dir/$working_dir/$module_dir") != "$trainee_user" ]; then
   echo "  Making module's working directory ($top_dir/$working_dir/$module_dir) owned by $trainee_user"
-  chown -R "$trainee_user" "$top_dir/$working_dir/$module_dir"
+  chown -R "$trainee_user:$trainee_user" "$top_dir/$working_dir/$module_dir"
 fi
 ####################
 
@@ -149,13 +142,6 @@ if [ ! -e "$top_dir/$working_dir/$module_dir" ]; then
   ln -s $top_dir/$data_sub_dir/gfp.bam
 
   # make tutorial paths sync with shorter paths used used in tutorials
-  if [[ ! -e /home/$sudoer_user/ChIP-seq ]]; then
-    su $sudoer_user -c "ln -s $top_dir/$working_dir/$module_dir /home/$sudoer_user/ChIP-seq"
-  fi
-  if [[ ! -e /home/$sudoer_user/Desktop/ChIP-seq ]]; then
-    su $sudoer_user -c "ln -s $top_dir/$working_dir/$module_dir /home/$sudoer_user/Desktop/ChIP-seq"
-  fi
-
   if [[ ! -e /home/$trainee_user/ChIP-seq ]]; then
     su $trainee_user -c "ln -s $top_dir/$working_dir/$module_dir /home/$trainee_user/ChIP-seq"
   fi
@@ -168,7 +154,7 @@ fi
 # last thing to run for this module
 if [ $(stat -c %U "$top_dir/$working_dir/$module_dir") != "$trainee_user" ]; then
   echo "  Making module's working directory ($top_dir/$working_dir/$module_dir) owned by $trainee_user"
-  chown -R "$trainee_user" "$top_dir/$working_dir/$module_dir"
+  chown -R "$trainee_user:$trainee_user" "$top_dir/$working_dir/$module_dir"
 fi
 ##########################
 
@@ -262,13 +248,6 @@ if [ ! -e "$top_dir/$working_dir/$module_dir" ]; then
   ln -s $top_dir/$data_sub_dir/insertions.bed
 
   # make tutorial paths sync with shorter paths used by the EBI folks
-  if [[ ! -e /home/$sudoer_user/RNA-seq ]]; then
-    su $sudoer_user -c "ln -s $top_dir/$working_dir/$module_dir /home/$sudoer_user/RNA-seq"
-  fi
-  if [[ ! -e /home/$sudoer_user/Desktop/RNA-seq ]]; then
-    su $sudoer_user -c "ln -s $top_dir/$working_dir/$module_dir /home/$sudoer_user/Desktop/RNA-seq"
-  fi
-
   if [[ ! -e /home/$trainee_user/RNA-seq ]]; then
     su $trainee_user -c "ln -s $top_dir/$working_dir/$module_dir /home/$trainee_user/RNA-seq"
   fi
@@ -282,7 +261,7 @@ fi
 # last thing to run for this module
 if [ $(stat -c %U "$top_dir/$working_dir/$module_dir") != "$trainee_user" ]; then
   echo "  Making module's working directory ($top_dir/$working_dir/$module_dir) owned by $trainee_user"
-  chown -R "$trainee_user" "$top_dir/$working_dir/$module_dir"
+  chown -R "$trainee_user:$trainee_user" "$top_dir/$working_dir/$module_dir"
 fi
 #########################
 
@@ -324,13 +303,6 @@ if [ ! -e "$top_dir/$working_dir/$module_dir" ]; then
   ln -s $top_dir/$data_sub_dir Data
 
   # make tutorial paths sync with shorter paths used by the EBI folks
-  if [[ ! -e /home/$sudoer_user/NGS ]]; then
-    su $sudoer_user -c "ln -s $top_dir/$working_dir/$module_dir /home/$sudoer_user/NGS"
-  fi
-  if [[ ! -e /home/$sudoer_user/Desktop/NGS ]]; then
-    su $sudoer_user -c "ln -s $top_dir/$working_dir/$module_dir /home/$sudoer_user/Desktop/NGS"
-  fi
-
   if [[ ! -e /home/$trainee_user/NGS ]]; then
     su $trainee_user -c "ln -s $top_dir/$working_dir/$module_dir /home/$trainee_user/NGS"
   fi
