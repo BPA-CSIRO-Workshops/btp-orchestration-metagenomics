@@ -95,7 +95,7 @@ resources:
             echo "Download relevant datasets, tools from NeCTAR Object Storage ..."
             cd /tmp/
             wget https://raw.githubusercontent.com/BPA-CSIRO-Workshops/heat-templates/master/scripts/standard_ngs_setup.sh
-            bash workshop_ngs_setup.sh
+            bash standard_ngs_setup.sh
             echo "Installing required packages ..."
             apt-get install freenx-server -y            
           params:
