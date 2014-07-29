@@ -1,0 +1,124 @@
+heat_template_version: '2013-05-23'
+
+description:
+  This template instantiates the Bioplatforms Australia Training Platform.
+  This will launch a single virtual machine on the NeCTAR Research Cloud using
+  the latest virtual machine image.
+parameters:
+  key_name:
+    type: string
+    label: Key Name
+    description:
+      Name of an existing key pair to enable SSH access to the instance.
+  instance_type:
+    type: string
+    label: Instance Type
+    description:
+      Size of the instance to be created.
+    default: m1.small
+    constraints:
+      - allowed_values: 
+        - m1.small 
+        - m1.medium 
+        - m1.large
+        - m1.xlarge 
+        - m1.xxlarge
+        description:
+          Must be a valid NeCTAR Flavour.
+  image_id:
+    type: string
+    label: Image ID
+    description:
+      ID of the NeCTAR image to be used for the instance.
+    default: '1b6bed46-6824-47e1-8f05-c0c590108305'
+  availability_zone:
+    type: string
+    label: Availability Zone
+    description: 
+      The NeCTAR availability zone where to launch the instance.
+    default: monash-01
+    constraints:
+      - allowed_values: 
+        - monash-01
+        - melbourne-qh2
+        - melbourne-np 
+        - qld
+        - NCI 
+        - sa 
+        - tasmania
+        description:
+          Must be a valid NeCTAR Availability Zone.
+  UbuntuPassword:
+    type: string
+    label: Ubuntu Password
+    description: Password for the local ubuntu user
+    hidden: True 
+    constraints:
+      - length: { min: 8, max: 12 }
+        description:
+          Password length must be between 8 and 12 characters.
+      - allowed_pattern: "[a-zA-Z0-9]+"
+        description:
+          Password must consist of characters and numbers only.
+  TraineePassword:
+    type: string
+    label: Trainee Password
+    description: Password of the local trainee user
+    hidden: True 
+    constraints:
+      - length: { min: 8, max: 12 }
+        description:
+          Password length must be between 8 and 12 characters.
+      - allowed_pattern: "[a-zA-Z0-9]+"
+        description:
+          Password must consist of characters and numbers only.
+  
+resources:
+  ngs_security_group:
+    type: AWS::EC2::SecurityGroup
+    properties:
+      GroupDescription: "Enable ssh (port 22) access"
+      SecurityGroupIngress:
+        - IpProtocol: 'icmp'
+          FromPort: '-1'
+          ToPort: '-1'
+          CidrIp: '0.0.0.0/0'
+        - IpProtocol: 'tcp'
+          FromPort: '22'
+          ToPort: '22'
+          CidrIp: '0.0.0.0/0'
+      
+  ngs_instance:
+    type: OS::Nova::Server
+    properties:
+      key_name: { get_param: key_name }
+      flavor: { get_param: instance_type }
+      image: { get_param: image_id }
+      availability_zone: { get_param: availability_zone }
+      security_groups:
+        - get_resource: ngs_security_group
+      user_data:
+        str_replace: 
+          template: |
+            #!/bin/bash
+            echo "Bootstrapping NGS Instance ..."
+            echo "Setting password for ubuntu user ..."
+            echo -e "ubuntu:$ubuntu_password" | chpasswd
+            echo "Adding trainee user ..."
+            useradd --create-home --shell /bin/bash trainee
+            echo "Setting password for trainee user ..."
+            echo -e "trainee:$trainee_password" | chpasswd
+            echo "Download relevant datasets, tools from NeCTAR Object Storage ..."
+            cd /tmp/
+            wget https://raw.githubusercontent.com/BPA-CSIRO-Workshops/heat-templates/master/scripts/workshop_ngs_setup.sh
+            bash workshop_ngs_setup.sh
+            echo "Installing required packages ..."
+            apt-get install freenx-server -y            
+          params:
+            $ubuntu_password: { get_param: UbuntuPassword } 
+            $trainee_password: { get_param: TraineePassword } 
+
+outputs:
+  instance_ip:
+    description: The IP address of the deployed instance.
+    value: { get_attr: [my_instance, first_address] }
