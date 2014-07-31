@@ -110,8 +110,8 @@ resources:
             echo -e "trainee:$trainee_password" | chpasswd
             echo "Download relevant datasets, tools from NeCTAR Object Storage ..."
             cd /tmp/
-            wget https://raw.githubusercontent.com/BPA-CSIRO-Workshops/btp_catalogue/master/ngs_workshop/workshop_ngs_setup.sh
-            bash workshop_ngs_setup.sh
+            wget https://raw.githubusercontent.com/BPA-CSIRO-Workshops/btp-catalogue/master/ngs-workshop/ngs-data-workshop.sh
+            bash ngs-data-workshop.sh
             echo "Installing required packages ..."
             apt-get install freenx-server -y            
           params:
