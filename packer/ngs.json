@@ -3,7 +3,7 @@
   "builders": [{
     "type": "virtualbox-iso",
     "guest_os_type": "Ubuntu_64",
-    "vm_name": "ngs",
+    "vm_name": "NGSTraining",
     "http_directory": "preseed",
     "iso_url": "http://releases.ubuntu.com/12.04/ubuntu-12.04.4-alternate-amd64.iso",
     "iso_checksum": "46e0fac240154bf59a11426a47a61363",

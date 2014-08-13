@@ -104,4 +104,4 @@ resources:
 outputs:
   instance_ip:
     description: The IP address of the deployed instance.
-    value: { get_attr: [my_instance, first_address] }
+    value: { get_attr: [ngs_instance, first_address] }
