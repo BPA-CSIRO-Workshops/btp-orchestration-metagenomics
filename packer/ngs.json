@@ -1,9 +1,9 @@
 {
-  "description": "BPA-CSIRO BTP Image Deployment",
+  "description": "BTP-NGS Image Deployment",
   "builders": [{
     "type": "virtualbox-iso",
     "guest_os_type": "Ubuntu_64",
-    "vm_name": "NGSTraining",
+    "vm_name": "BTP-NGS",
     "http_directory": "preseed",
     "iso_url": "http://releases.ubuntu.com/12.04/ubuntu-12.04.4-alternate-amd64.iso",
     "iso_checksum": "46e0fac240154bf59a11426a47a61363",
@@ -29,7 +29,7 @@
   }],
   "provisioners": [{
     "type": "shell",
-    "script": "ngs-tools.sh",
+    "script": "btp-catalogue/ngs-workshop/ngs-tools.sh",
     "override": {
       "virtualbox-iso": {
         "execute_command": "echo 'ubuntu' | sudo -S bash {{.Path}}"
