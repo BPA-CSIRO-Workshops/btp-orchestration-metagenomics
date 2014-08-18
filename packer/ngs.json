@@ -11,7 +11,7 @@
     "ssh_username": "ubuntu",
     "ssh_password": "ubuntu",
     "ssh_port": 22,
-    "ssh_wait_timeout": "30m",
+    "ssh_wait_timeout": "45m",
     "format": "ovf",
     "disk_size": 30000,
     "shutdown_command": "echo 'ubuntu' | sudo -S shutdown -P now",
@@ -25,6 +25,10 @@
       "keyboard-configuration/modelcode=SKIP keyboard-configuration/layout=USA ",
       "keyboard-configuration/variant=USA console-setup/ask_detect=false ",
       "initrd=/install/initrd.gz -- <enter>"
+    ],
+    "output_directory": "output",
+    "vboxmanage": [
+      ["modifyvm", "{{ .Name }}", "--memory", "1024"]
     ]
   }],
   "provisioners": [{

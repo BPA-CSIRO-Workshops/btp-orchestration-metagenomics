@@ -54,24 +54,18 @@ parameters:
     description: Password for the local ubuntu user
     hidden: True 
     constraints:
-      - length: { min: 8, max: 12 }
+      - length: { min: 8 }
         description:
-          Password length must be between 8 and 12 characters.
-      - allowed_pattern: "[a-zA-Z0-9]+"
-        description:
-          Password must consist of characters and numbers only.
+          Password length must be between at least 8 characters long.
   TraineePassword:
     type: string
     label: Trainee Password
     description: Password of the local trainee user
     hidden: True 
     constraints:
-      - length: { min: 8, max: 12 }
+      - length: { min: 8 }
         description:
-          Password length must be between 8 and 12 characters.
-      - allowed_pattern: "[a-zA-Z0-9]+"
-        description:
-          Password must consist of characters and numbers only.
+          Password length must be between at least 8 characters long.
   
 resources:
   ngs_security_group:
@@ -113,6 +107,7 @@ resources:
             wget https://raw.githubusercontent.com/BPA-CSIRO-Workshops/btp-catalogue/master/ngs-workshop/ngs-data-workshop.sh
             bash ngs-data-workshop.sh
             echo "Installing required packages ..."
+            sleep 30
             apt-get install freenx-server -y            
           params:
             $ubuntu_password: { get_param: UbuntuPassword } 
