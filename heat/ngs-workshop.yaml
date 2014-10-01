@@ -108,6 +108,7 @@ resources:
             bash ngs-data-workshop.sh
             echo "Installing required packages ..."
             sleep 30
+            apt-get update
             apt-get install freenx-server -y            
           params:
             $ubuntu_password: { get_param: UbuntuPassword } 
