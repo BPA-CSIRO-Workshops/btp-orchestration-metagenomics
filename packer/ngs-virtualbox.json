@@ -3,8 +3,8 @@
   "builders": [{
     "type": "virtualbox-iso",
     "guest_os_type": "Ubuntu_64",
-    "vm_name": "BTP-NGS",
-    "http_directory": "preseed",
+    "vm_name": "ngs",
+    "http_directory": "precise",
     "iso_url": "http://releases.ubuntu.com/12.04/ubuntu-12.04.4-alternate-amd64.iso",
     "iso_checksum": "46e0fac240154bf59a11426a47a61363",
     "iso_checksum_type": "md5",
@@ -28,16 +28,8 @@
     ],
     "output_directory": "output",
     "vboxmanage": [
-      ["modifyvm", "{{ .Name }}", "--memory", "1024"]
+      ["modifyvm", "{{ .Name }}", "--memory", "2048"],
+      ["modifyvm", "{{ .Name }}", "--cpus", "2"]
     ]
-  }],
-  "provisioners": [{
-    "type": "shell",
-    "script": "btp-catalogue/ngs-workshop/ngs-tools.sh",
-    "override": {
-      "virtualbox-iso": {
-        "execute_command": "echo 'ubuntu' | sudo -S bash {{.Path}}"
-      }
-    }
   }]
 }
