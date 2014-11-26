@@ -30,7 +30,7 @@ parameters:
     label: Image ID
     description:
       ID of the NeCTAR image to be used for the instance.
-    default: '1b6bed46-6824-47e1-8f05-c0c590108305'
+    default: '2850afc2-4dc9-4ce6-9eb6-c3f4d8fd412c'
   availability_zone:
     type: string
     label: Availability Zone

@@ -21,15 +21,16 @@ Parameters:
   ImageName:
     Description: "ID of the NeCTAR image to be used for the instance."
     Type: "String"
-    Default: "NGSTrainingV1.4"
+    Default: "NGSTrainingV1.6"
     AllowedValues:
-      - "NGSTrainingV1.4"
+      - "NGSTrainingV1.6"
   AvailabilityZone:
     Description: "NeCTAR availability zone where to launch the instance."
     Type: "String"
     Default: "monash-01"
     AllowedValues: 
       - "monash-01"
+      - "monash-02"
       - "melbourne-qh2"
       - "melbourne-np"
       - "qld"
@@ -39,10 +40,11 @@ Parameters:
   UbuntuPassword:
     Description: "Password for the local ubuntu user."
     Type: "String"
+    NoEcho: "true"
 
 Mappings:
   NGSImageName:
-    "NGSTrainingV1.4": { NGSImageID: 1b6bed46-6824-47e1-8f05-c0c590108305 }
+    "NGSTrainingV1.6": { NGSImageID: 2850afc2-4dc9-4ce6-9eb6-c3f4d8fd412c }
 
 Resources:
   NGSSecurityGroup:
@@ -82,14 +84,19 @@ Resources:
       UserData:
         Fn::Base64:
           Fn::Replace:
-            - MyUbuntuPassword: { Ref: UbuntuPassword }
+            - ubuntu_password: { Ref: UbuntuPassword }
             - |
               #!/bin/bash
               echo "Bootstrapping NGS Instance ..."
+              # Set user password
               echo "Setting password for ubuntu user ..."
-              echo -e "ubuntu:MyUbuntuPassword" | chpasswd
+              echo -e "ubuntu:ubuntu_password" | chpasswd
+              # Set hostname
+              echo "127.0.0.1 $HOSTNAME" | tee -a /etc/hosts
+              # Download datasets
               echo "Download relevant datasets, tools from NeCTAR Object Storage ..."
-              cd /tmp/
-              wget https://raw.githubusercontent.com/BPA-CSIRO-Workshops/btp-catalogue/master/ngs-workshop/ngs-data.sh
-              bash ngs-data.sh
-              echo "Installing required packages ..."
+              cd /home/ubuntu
+              wget https://raw.githubusercontent.com/BPA-CSIRO-Workshops/btp-catalogue/master/ngs-workshop/ngs_workshop.pp
+              wget https://raw.githubusercontent.com/BPA-CSIRO-Workshops/btp-catalogue/master/ngs-workshop/ngs_workshop.yaml
+              wget https://raw.githubusercontent.com/BPA-CSIRO-Workshops/btp-catalogue/master/ngs-workshop/hiera.yaml
+              puppet apply ngs_workshop.pp --hiera_config ./hiera.yaml
