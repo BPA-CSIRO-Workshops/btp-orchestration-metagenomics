@@ -1,0 +1,74 @@
+{
+  "description": "BTP VMWare Image Deployment",
+  "builders": [{
+    "type": "vmware-iso",
+    "guest_os_type": "Ubuntu-64",
+    "vm_name": "btp",
+    "http_directory": "precise",
+    "iso_url": "http://releases.ubuntu.com/12.04/ubuntu-12.04.5-alternate-amd64.iso",
+    "iso_checksum": "fa0893ffe2188a6daf918791cdccb480",
+    "iso_checksum_type": "md5",
+    "ssh_username": "ubuntu",
+    "ssh_password": "ubuntu",
+    "ssh_port": "22",
+    "ssh_wait_timeout": "60m",
+    "disk_size": "30000",
+    "shutdown_command": "echo 'ubuntu' | sudo -S shutdown -P now",
+    "headless": "false",
+    "boot_command": [
+      "<esc><esc><enter><wait>",
+      "/install/vmlinuz noapic ",
+      "preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg ",
+      "debian-installer=en_US auto locale=en_US kbd-chooser/method=us ",
+      "hostname={{ .Name }} ",
+      "fb=false debconf/frontend=noninteractive ",
+      "keyboard-configuration/modelcode=SKIP keyboard-configuration/layout=USA ",
+      "keyboard-configuration/variant=USA console-setup/ask_detect=false ",
+      "initrd=/install/initrd.gz -- <enter>"
+    ],
+    "output_directory": "vmware",
+    "tools_upload_flavor": "linux",
+    "vmx_data": {
+      "cpuid.coresPerSocket": "1",
+      "memsize": "4096",
+      "numvcpus": "2"
+    }
+  }],
+  "provisioners": [{
+    "type": "shell",
+    "script": "btp-catalogue/ngs-workshop/provisioners/preflight.sh",
+    "pause_before": "10s",
+    "override": {
+      "vmware-iso": {
+        "execute_command": "echo 'ubuntu' | sudo -S bash {{.Path}}"
+      }
+    }
+  },{
+    "type": "shell",
+    "script": "btp-catalogue/ngs-workshop/provisioners/vmware/vmware-tools.sh",
+    "pause_before": "10s",
+    "override": {
+      "vmware-iso": {
+        "execute_command": "echo 'ubuntu' | sudo -S bash {{.Path}}"
+      }
+    }
+  },{
+    "type": "shell",
+    "script": "btp-catalogue/ngs-workshop/ngs-tools.sh",
+    "pause_before": "10s",
+    "override": {
+      "vmware-iso": {
+        "execute_command": "echo 'ubuntu' | sudo -S bash {{.Path}}"
+      }
+    }
+  },{
+    "type": "shell",
+    "script": "btp-catalogue/ngs-workshop/provisioners/postflight.sh",
+    "pause_before": "10s",
+    "override": {
+      "vmware-iso": {
+        "execute_command": "echo 'ubuntu' | sudo -S bash {{.Path}}"
+      }
+    }
+  }]
+}
