@@ -7,9 +7,11 @@ Description: "This template instantiates the Bioplatforms Australia Training
 Parameters:
   KeyName:
     Description: "Name of an existing key pair to access the instance."
+    Label: "Key Name"
     Type: "String"
   InstanceType:
     Description: "Size of the instance to be created."
+    Label: "Instance Type"
     Type: "String"
     Default: "m1.small"
     AllowedValues: 
@@ -18,14 +20,20 @@ Parameters:
       - "m1.large"
       - "m1.xlarge" 
       - "m1.xxlarge"
+  InstanceCount:
+    Description: "Number of instances to launch."
+    Label: "Instance Count"
+    Type: "Number"
   ImageName:
     Description: "ID of the NeCTAR image to be used for the instance."
+    Label: "Image Name"
     Type: "String"
     Default: "NGSTrainingV1.6"
     AllowedValues:
       - "NGSTrainingV1.6"
   AvailabilityZone:
     Description: "NeCTAR availability zone where to launch the instance."
+    Label: "Availability Zone"
     Type: "String"
     Default: "monash-01"
     AllowedValues: 
@@ -39,8 +47,25 @@ Parameters:
       - "tasmania"
   UbuntuPassword:
     Description: "Password for the local ubuntu user."
+    Label: "Ubuntu Password"
     Type: "String"
-    NoEcho: "true"
+    NoEcho: "True"
+  DataQualityModule:
+    Description: "Install the Data Quality module in the instance."
+    Label: "Install Data Quality Module?"
+    Type: "String"
+    Default: "Yes"
+    AllowedValues: 
+      - "Yes"
+      - "No"
+  ChIPSeqModule:
+    Description: "Install the ChIP-Seq module in the instance."
+    Label: "Install ChIP-Seq Module?"
+    Type: "String"
+    Default: "Yes"
+    AllowedValues: 
+      - "Yes"
+      - "No"
 
 Mappings:
   NGSImageName:
