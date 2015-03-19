@@ -1,5 +1,5 @@
 {
-  "description": "BTP VMWare Image Deployment",
+  "description": "BTP Image Deployment for VMWare",
   "builders": [{
     "type": "vmware-iso",
     "guest_os_type": "Ubuntu-64",

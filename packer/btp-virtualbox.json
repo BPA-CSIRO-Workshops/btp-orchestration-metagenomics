@@ -1,5 +1,5 @@
 {
-  "description": "BTP VirtualBox Image Deployment",
+  "description": "BTP Image Deployment for VirtualBox",
   "builders": [{
     "type": "virtualbox-iso",
     "guest_os_type": "Ubuntu_64",
