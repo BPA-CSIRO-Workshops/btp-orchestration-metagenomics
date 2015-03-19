@@ -66,6 +66,22 @@ Parameters:
     AllowedValues: 
       - "Yes"
       - "No"
+  RNASeqModule:
+    Description: "Install the RNA-Seq module in the instance."
+    Label: "Install RNA-Seq Module?"
+    Type: "String"
+    Default: "Yes"
+    AllowedValues: 
+      - "Yes"
+      - "No"
+  DeNovoModule:
+    Description: "Install the de novo module in the instance."
+    Label: "Install de novo Module?"
+    Type: "String"
+    Default: "Yes"
+    AllowedValues: 
+      - "Yes"
+      - "No"
 
 Mappings:
   NGSImageName:
