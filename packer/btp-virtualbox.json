@@ -35,7 +35,7 @@
   }],
   "provisioners": [{
     "type": "shell",
-    "script": "btp-catalogue/ngs-workshop/provisioners/preflight.sh",
+    "script": "provisioners/preflight.sh",
     "pause_before": "10s",
     "override": {
       "virtualbox-iso": {
@@ -44,7 +44,7 @@
     }
   },{
     "type": "shell",
-    "script": "btp-catalogue/ngs-workshop/provisioners/virtualbox/guest-additions.sh",
+    "script": "provisioners/virtualbox/guest-additions.sh",
     "pause_before": "10s",
     "override": {
       "virtualbox-iso": {
@@ -62,7 +62,7 @@
     }
   },{
     "type": "shell",
-    "script": "btp-catalogue/ngs-workshop/provisioners/postflight.sh",
+    "script": "provisioners/postflight.sh",
     "pause_before": "10s",
     "override": {
       "virtualbox-iso": {
