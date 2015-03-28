@@ -33,15 +33,18 @@
       [ "-smp", "4" ]
     ]
   }],
+  "push": {
+    "name": "jrevote/btp-build"
+  },
   "provisioners": [{
     "type": "shell",
     "scripts": [
-      "provisioners/banner.sh",
-      "provisioners/security.sh",
-      "provisioners/openstack-debian.sh",
-      "provisioners/fail2ban.sh",
-      "provisioners/cleanup.sh",
-      "provisioners/zerodisk.sh"
+      "provisioners/nectar/banner.sh",
+      "provisioners/nectar/security.sh",
+      "provisioners/nectar/openstack-debian.sh",
+      "provisioners/nectar/fail2ban.sh",
+      "provisioners/nectar/cleanup.sh",
+      "provisioners/nectar/zerodisk.sh"
       ]
     }
   ]
