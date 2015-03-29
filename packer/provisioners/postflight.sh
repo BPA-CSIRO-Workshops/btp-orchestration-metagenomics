@@ -2,6 +2,7 @@
 
 # Postflight
 apt-get update
+apt-get install -y lightdm
 apt-get install -y gnome-session-fallback
 /usr/lib/lightdm/lightdm-set-defaults -s gnome-classic
 /usr/lib/lightdm/lightdm-set-defaults -l false
