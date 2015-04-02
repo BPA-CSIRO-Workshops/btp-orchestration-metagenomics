@@ -36,34 +36,12 @@
   }],
   "provisioners": [{
     "type": "shell",
-    "script": "btp-catalogue/ngs-workshop/provisioners/preflight.sh",
-    "pause_before": "10s",
-    "override": {
-      "vmware-iso": {
-        "execute_command": "echo 'ubuntu' | sudo -S bash {{.Path}}"
-      }
-    }
-  },{
-    "type": "shell",
-    "script": "btp-catalogue/ngs-workshop/provisioners/vmware/vmware-tools.sh",
-    "pause_before": "10s",
-    "override": {
-      "vmware-iso": {
-        "execute_command": "echo 'ubuntu' | sudo -S bash {{.Path}}"
-      }
-    }
-  },{
-    "type": "shell",
-    "script": "btp-catalogue/ngs-workshop/ngs-tools.sh",
-    "pause_before": "10s",
-    "override": {
-      "vmware-iso": {
-        "execute_command": "echo 'ubuntu' | sudo -S bash {{.Path}}"
-      }
-    }
-  },{
-    "type": "shell",
-    "script": "btp-catalogue/ngs-workshop/provisioners/postflight.sh",
+    "scripts": [
+      "provisioners/preflight.sh",
+      "provisioners/vmware/vmware-tools.sh",
+      "btp-catalogue/ngs-workshop/ngs-tools.sh",
+      "provisioners/postflight.sh"
+    ],
     "pause_before": "10s",
     "override": {
       "vmware-iso": {
