@@ -178,6 +178,17 @@
       "manifest_file": "btp-catalogue/ngs-workshop/btp.pp",
       "hiera_config_path": "btp-module-rna-seq/datasets/ngs-rnaseq-hiera.yaml",
       "execute_command": "{{.FacterVars}}{{if .Sudo}} echo 'ubuntu' | sudo -S -E {{end}}puppet apply --verbose --parser future {{if ne .ModulePath \"\"}}--modulepath='{{.ModulePath}}' {{end}} {{if ne .HieraConfigPath \"\"}}--hiera_config='{{.HieraConfigPath}}' {{end}} {{if ne .ManifestDir \"\"}}--manifestdir='{{.ManifestDir}}' {{end}} --detailed-exitcodes {{.ManifestFile}}"
+    },
+    {
+      "type": "shell",
+      "inline": [
+        "chown ubuntu.ubuntu /mnt/workshop -R"
+      ],
+      "override": {
+        "virtualbox-iso": {
+          "execute_command": "echo 'ubuntu' | sudo -S bash {{.Path}}"
+        }
+      }
     }
   ]
 }
