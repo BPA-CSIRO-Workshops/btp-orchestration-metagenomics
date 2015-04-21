@@ -148,6 +148,9 @@
                      "puppet apply --verbose --parser future btp-catalogue/ngs-workshop/btp.pp --hiera_config=/etc/puppet/ngs-mapping-hiera-aws.yaml",
                      "puppet apply --verbose --parser future btp-catalogue/ngs-workshop/btp.pp --hiera_config=/etc/puppet/ngs-denovo-hiera-aws.yaml",
                      "puppet apply --verbose --parser future btp-catalogue/ngs-workshop/btp.pp --hiera_config=/etc/puppet/ngs-rnaseq-hiera-aws.yaml",
+                     "# Manuals",
+                     "su trainee -c \"curl -o /home/trainee/Desktop/trainee_handout.pdf http://bpa-csiro-workshops.github.io/btp-workshop-ngs/pdfs-latest/trainee_handout.pdf\"",
+                     "su trainee -c \"curl -o /home/trainee/Desktop/trainer_handout.pdf http://bpa-csiro-workshops.github.io/btp-workshop-ngs/pdfs-latest/trainer_handout.pdf\"",
                      "# Set Trainee Credentials",
                      {
                        "Fn::Join": [ "", [
