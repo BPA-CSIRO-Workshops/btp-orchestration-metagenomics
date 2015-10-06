@@ -14,11 +14,11 @@ Table of Contents
   - [VMWare](#vmware)
   - [NeCTAR Credentials](#nectar-credentials)
   - [AWS Credentials](#aws-credentials)
-- [Bootstrapping Images](#bootstrapping-images)
+- [Creating BTP Images](#creating-btp-images)
   - [VirtualBox and VMWare](#virtualbox-and-vmware)
   - [NeCTAR](#nectar)
   - [AWS](#aws)
-- [Launching Instances](#launching-instances)
+- [Launching BTP Instances](#launching-btp-instances)
   - [VirtualBox and VMWare](#virtualbox-and-vmware-1)
   - [NeCTAR](#nectar-1)
   - [AWS](#aws-1)
@@ -31,42 +31,98 @@ Prerequisites
 
 Packer
 ------
+In order to build the images using the recipes, 
+Packer must be installed on the client machine.
+Packer packages are available for most platforms and can be downloaded
+from its [website](https://www.packer.io/downloads.html).
 
 VirtualBox
 ----------
+To create VirtualBox images, VirtualBox must be present
+on the client machine. Packer launches an Ubuntu virtual machine,
+installs required tools and downloads the datasets into the instance.
+Once this is completed, Packer packages the instance into a stand-alone
+image that can be loaded to other computers running VirtualBox.
+VirtualBox package can be downloaded from its [website](https://www.virtualbox.org/wiki/Downloads).
 
 VMWare
 ------
+Similar to VirtualBox, VMWare (Player/Fusion) must be present on the client
+machine to create a virtual machine image for it. VMWare products can be downloaded from
+its [website](https://my.vmware.com/web/vmware/free#desktop_end_user_computing/vmware_workstation_player/12_0).
 
 NeCTAR Credentials
 ------------------
+<TODO>
 
 AWS Credentials
 ---------------
+<TODO>
 
-Bootstrapping Images
-====================
-
-VirtualBox and VMWare
----------------------
-
-NeCTAR
-------
-
-AWS
----
-
-Launching Instances
+Creating BTP Images
 ===================
+The following section outlines the steps for creating BTP images.
 
 VirtualBox and VMWare
 ---------------------
+[Install Packer:](#prerequisites)
+Clone the BPA-CSIRO BTP NGS Workshop Repo
+```
+git clone https://github.com/BPA-CSIRO-Workshops/btp-workshop-ngs.git
+```
+
+Pull Relevant Training Modules:
+```
+cd btp-workshop-ngs
+git submodule update --init --recursive
+```
+
+[Install VirtualBox and/or VMWare:](#prerequisites)
+
+Build VirtualBox and/or VMWare Images:
+```
+cd orchestration/packer/
+packer build btp-virtualbox.json
+```
+
+This process will take a while depending on the client machine and network configuration,
+as it installs the relevant tools and downloads the datasets into the virtual machine image.
+The resulting VirtualBox image will generated inside the `virtualbox` directory.
+This image can then be shared, other users can then load this image into their own machine
+running VirtualBox.
+
+For building the VMWare image, the same process can be followed as VirtualBox,
+simply pass the VMWare build recipe to Packer. The VMWare image will be generated
+inside the `vmware` directory.
+
+```
+cd orchestration/packer/
+packer build btp-vmware.json
+```
 
 NeCTAR
 ------
+<TODO>
 
 AWS
 ---
+<TODO>
+
+Launching BTP Instances
+=======================
+This section outlines the steps to launch BTP instances on the various environments.
+
+VirtualBox and VMWare
+---------------------
+<TODO>
+
+NeCTAR
+------
+<TODO>
+
+AWS
+---
+<TODO>
 
 License
 =======
