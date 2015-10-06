@@ -65,19 +65,20 @@ The following section outlines the steps for creating BTP images.
 
 VirtualBox and VMWare
 ---------------------
-[Install Packer:](#prerequisites)
+[Install Packer](#prerequisites)
+
+[Install VirtualBox and/or VMWare](#prerequisites)
+
 Clone the BPA-CSIRO BTP NGS Workshop Repo
 ```
 git clone https://github.com/BPA-CSIRO-Workshops/btp-workshop-ngs.git
 ```
 
-Pull Relevant Training Modules:
+Pull Relevant Training Modules
 ```
 cd btp-workshop-ngs
 git submodule update --init --recursive
 ```
-
-[Install VirtualBox and/or VMWare:](#prerequisites)
 
 Build VirtualBox and/or VMWare Images:
 ```
