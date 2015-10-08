@@ -38,18 +38,19 @@ from its [website](https://www.packer.io/downloads.html).
 
 VirtualBox
 ----------
-To create VirtualBox images, VirtualBox must be present
+To create VirtualBox images, [VirtualBox](https://www.virtualbox.org/wiki/Downloads) must be present
 on the client machine. Packer launches an Ubuntu virtual machine,
 installs required tools and downloads the datasets into the instance.
 Once this is completed, Packer packages the instance into a stand-alone
 image that can be loaded to other computers running VirtualBox.
-VirtualBox package can be downloaded from its [website](https://www.virtualbox.org/wiki/Downloads).
 
 VMWare
 ------
-Similar to VirtualBox, VMWare (Player/Fusion) must be present on the client
-machine to create a virtual machine image for it. VMWare products can be downloaded from
-its [website](https://my.vmware.com/web/vmware/free#desktop_end_user_computing/vmware_workstation_player/12_0).
+Similar to VirtualBox, VMWare  must be present on the client
+machine to create a virtual machine image for it. When building the BTP image
+from OS X, [VMWare Fusion](http://www.vmware.com/products/fusion/overview.html) must be installed.
+When building from a Windows or Linux machine, [VMWare Workstation](http://www.vmware.com/products/fusion/overview.html) must be installed.
+
 
 NeCTAR Credentials
 ------------------
@@ -67,7 +68,7 @@ VirtualBox and VMWare
 ---------------------
 [Install Packer](#prerequisites)
 
-[Install VirtualBox and/or VMWare](#prerequisites)
+[Install VirtualBox or VMWare](#prerequisites)
 
 Clone the BPA-CSIRO BTP NGS Workshop Repo
 ```
