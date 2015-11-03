@@ -1,7 +1,9 @@
 #!/bin/bash
 
 # Install VMWare Tools
+apt-get update
 apt-get install -y dkms
+apt-get clean
 mkdir /mnt/iso
 mount -o loop /home/ubuntu/linux.iso /mnt/iso
 cd /tmp
