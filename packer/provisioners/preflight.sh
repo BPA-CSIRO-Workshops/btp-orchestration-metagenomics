@@ -7,6 +7,7 @@ apt-get upgrade -y
 apt-get dist-upgrade -y
 apt-get autoremove -;
 apt-get clean
+echo "precedence ::ffff:0:0/96 100" >> /etc/gai.conf
 
 # Reboot
 reboot
