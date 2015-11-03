@@ -41,7 +41,6 @@
       "scripts": [
         "provisioners/common/preflight.sh",
         "provisioners/virtualbox/guest-additions.sh",
-        "provisioners/common/prepare.sh",
         "provisioners/common/misc.sh",
         "provisioners/common/scm.sh",
         "provisioners/common/compilers.sh",
