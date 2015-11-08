@@ -116,7 +116,10 @@ This section outlines the steps to launch BTP instances on the various environme
 
 VirtualBox and VMWare
 ---------------------
-<TODO>
+The VirtualBox and VMWare images are available for download
+from the BTP workshop release page:
+https://github.com/BPA-CSIRO-Workshops/btp-workshop-ngs/releases
+Once the image is downloaded, it can be loaded into VirtualBox and VMWare.
 
 NeCTAR
 ------
