@@ -19,5 +19,5 @@ find ../../ -type f -name 'data*.yaml' | while read module; do
   - $module_name-datasets
 EOF
     cp $module /etc/puppet/$module_name-datasets.yaml;
-    puppet apply --verbose --parser future btp-datasets.pp --hiera_config=/etc/puppet/$module_name-datasets-hiera.yaml;
+    puppet apply --verbose --parser future orchestration/puppet/btp-datasets.pp --hiera_config=/etc/puppet/$module_name-datasets-hiera.yaml;
 done;

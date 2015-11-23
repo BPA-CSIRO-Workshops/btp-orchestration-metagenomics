@@ -19,5 +19,5 @@ find ../../ -type f -name 'tools*.yaml' | while read module; do
   - $module_name-tools
 EOF
     cp $module /etc/puppet/$module_name-tools.yaml;
-    puppet apply --verbose --parser future btp-tools.pp --hiera_config=/etc/puppet/$module_name-tools-hiera.yaml;
+    puppet apply --verbose --parser future orchestration/puppet/btp-tools.pp --hiera_config=/etc/puppet/$module_name-tools-hiera.yaml;
 done;
