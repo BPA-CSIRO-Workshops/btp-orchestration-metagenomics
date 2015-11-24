@@ -6,7 +6,7 @@ if [ ! -e "/tmp/btp-workshop-ngs" ]; then
 fi
 cd /tmp/btp-workshop-ngs;
 
-# Tools
+# Datasets
 find ../../ -type f -name 'data*.yaml' | while read module; do
     module_name=`echo $module | awk -F '/' '{ print $3 }'`;
     cat > /etc/puppet/$module_name-datasets-hiera.yaml << EOF
