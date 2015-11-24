@@ -23,6 +23,12 @@ packages=(git mercurial subversion)
 apt-get install -y ${packages[@]} && apt-get clean
 ####################
 
+##########
+## Java ##
+##########
+packages=(default-jre default-jdk)
+apt-get install -y ${packages[@]} && apt-get clean
+
 ############
 ## Puppet ##
 ############
