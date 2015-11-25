@@ -3,7 +3,7 @@
   "builders": [ {
       "type": "virtualbox-iso",
       "guest_os_type": "Ubuntu_64",
-      "vm_name": "btp",
+      "vm_name": "BTP-{{isotime \"2006-01-02\"}}",
       "http_directory": "precise",
       "iso_url": "http://releases.ubuntu.com/12.04/ubuntu-12.04.5-alternate-amd64.iso",
       "iso_checksum": "fa0893ffe2188a6daf918791cdccb480",
