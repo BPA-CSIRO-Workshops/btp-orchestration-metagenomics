@@ -13,6 +13,7 @@
       "ssh_port": "22",
       "ssh_wait_timeout": "60m",
       "disk_size": "50000",
+      "disk_type_id": "0",
       "shutdown_command": "echo 'ubuntu' | sudo -S shutdown -P now",
       "headless": "false",
       "boot_command": [
