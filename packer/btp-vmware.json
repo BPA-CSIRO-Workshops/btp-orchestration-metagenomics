@@ -53,7 +53,8 @@
     {
       "type": "shell",
       "inline": [
-        "chown ubuntu.ubuntu /mnt/workshop -R"
+        "echo -e 'trainee:trainee' | chpasswd",
+        "chown trainee.trainee /mnt/workshop -R"
       ],
       "override": {
         "vmware-iso": {
