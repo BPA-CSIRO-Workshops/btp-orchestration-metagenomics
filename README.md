@@ -34,11 +34,11 @@ Packer
 In order to build the images using the recipes, 
 Packer must be installed on the client machine.
 Packer packages are available for most platforms and can be downloaded
-from its [website](https://www.packer.io/downloads.html).
+from the [Packer website][packer].
 
 VirtualBox
 ----------
-To create VirtualBox images, [VirtualBox](https://www.virtualbox.org/wiki/Downloads) must be present
+To create VirtualBox images, [VirtualBox][virtualbox] must be present
 on the client machine. Packer launches an Ubuntu virtual machine,
 installs required tools and downloads the datasets into the instance.
 Once this is completed, Packer packages the instance into a stand-alone
@@ -48,17 +48,21 @@ VMWare
 ------
 Similar to VirtualBox, VMWare  must be present on the client
 machine to create a virtual machine image for it. When building the BTP image
-from OS X, [VMWare Fusion](http://www.vmware.com/products/fusion/overview.html) must be installed.
-When building from a Windows or Linux machine, [VMWare Workstation](http://www.vmware.com/products/fusion/overview.html) must be installed.
-
+from OS X, [VMWare Fusion][vmware-fusion] must be installed.
+When building from a Windows or Linux machine, 
+[VMWare Workstation][vmware-workstation] must be installed.
 
 NeCTAR Credentials
 ------------------
-<TODO>
+NeCTAR Credentials must be downloaded from the NeCTAR Dashboard
+to interact with the NeCTAR APIs and cloud resources,
+more information can found in the [NeCTAR Authentication page][nectar-authentcation].
 
 AWS Credentials
 ---------------
-<TODO>
+An AWS account is required to be able to use the BTP
+on AWS. More information can be found on the [AWS website][aws].
+AWS provides a [free tier][aws-free] service to get users started quickly.
 
 Creating BTP Images
 ===================
@@ -117,8 +121,7 @@ This section outlines the steps to launch BTP instances on the various environme
 VirtualBox and VMWare
 ---------------------
 The VirtualBox and VMWare images are available for download
-from the BTP workshop release page:
-https://github.com/BPA-CSIRO-Workshops/btp-workshop-ngs/releases
+from the BTP workshop [release page][btp-ngs-release].
 Once the image is downloaded, it can be loaded into VirtualBox and VMWare.
 
 NeCTAR
@@ -134,3 +137,12 @@ License
 The contents of this repository are released under the Creative Commons
 Attribution 3.0 Unported License. For a summary of what this means,
 please see: http://creativecommons.org/licenses/by/3.0/deed.en_GB
+
+[packer]: https://www.packer.io/downloads.html
+[virtualbox]: http://www.vmware.com/products/fusion/overview.html
+[vmware-fusion]: http://www.vmware.com/products/fusion/overview.html
+[vmware-workstation]: http://www.vmware.com/products/fusion/overview.html
+[btp-ngs-release]: https://github.com/BPA-CSIRO-Workshops/btp-workshop-ngs/releases
+[nectar-authentication]: https://support.rc.nectar.org.au/docs/authentication
+[aws]: https://aws.amazon.com/
+[aws-free]: https://aws.amazon.com/free/
