@@ -108,7 +108,41 @@ packer build btp-vmware.json
 
 NeCTAR
 ------
-<TODO>
+
+Clone the BPA-CSIRO BTP NGS Workshop Repo
+```
+git clone https://github.com/BPA-CSIRO-Workshops/btp-workshop-ngs.git
+```
+
+Pull Relevant Training Modules
+```
+cd btp-workshop-ngs
+git submodule update --init --recursive
+```
+
+Build VirtualBox and/or VMWare Images:
+```
+cd orchestration/packer/
+packer build btp-qemu.json
+```
+
+Packer will generate a `.qcow2` image file inside the qemu directory.
+This image can then be uploaded to the NeCTAR Image catalog using 
+the [`python-glanceclient`][python-glanceclient].
+
+Source the OpenStack credentials file downloaded from NeCTAR:
+```
+source openrc.sh
+```
+
+Then start the image upload process using the glance CLI:
+```
+glance image-create --name="BTP-Image-V1.0" --disk-format=qcow2 --container-format=bare < BTP-2015-12-29.qcow2
+```
+
+The new image is the uploaded and now available on the NeCTAR Research Cloud.
+It can be instantiated into instances on the NeCTAR Research Cloud,
+from the [NeCTAR Dashboard][nectar-dashboard] or using the [NeCTAR API][nectar-api].
 
 AWS
 ---
@@ -144,5 +178,8 @@ please see: http://creativecommons.org/licenses/by/3.0/deed.en_GB
 [vmware-workstation]: http://www.vmware.com/products/fusion/overview.html
 [btp-ngs-release]: https://github.com/BPA-CSIRO-Workshops/btp-workshop-ngs/releases
 [nectar-authentication]: https://support.rc.nectar.org.au/docs/authentication
+[nectar-dashboard]: https://support.rc.nectar.org.au/docs/dashboard
+[nectar-api]: https://support.rc.nectar.org.au/docs/api-clients
 [aws]: https://aws.amazon.com/
 [aws-free]: https://aws.amazon.com/free/
+[python-glanceclient]: https://github.com/openstack/python-glanceclient
