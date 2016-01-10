@@ -33,8 +33,9 @@ Packer
 ------
 In order to build the images using the recipes, 
 Packer must be installed on the client machine.
-Packer packages are available for most platforms and can be downloaded
-from the [Packer website][packer].
+Packer packages are available for most platforms (Windows, Linux and OS X) and can be downloaded
+from the [Packer website][packer]. Once installed,
+the `packer` command line tool will be available on the system.
 
 VirtualBox
 ----------
@@ -57,6 +58,9 @@ NeCTAR Credentials
 NeCTAR Credentials must be downloaded from the NeCTAR Dashboard
 to interact with the NeCTAR APIs and cloud resources,
 more information can found in the [NeCTAR Authentication page][nectar-authentcation].
+
+OpenStack Clients
+-----------------
 
 AWS Credentials
 ---------------
@@ -105,6 +109,10 @@ inside the `vmware` directory.
 cd orchestration/packer/
 packer build btp-vmware.json
 ```
+
+The resulting `vmware` and `virtualbox` stand-alone images,
+can be easily shared to other users, and can then be easily
+loaded into VirtualBox and VMWare.
 
 NeCTAR
 ------
