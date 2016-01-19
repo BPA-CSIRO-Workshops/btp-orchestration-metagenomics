@@ -2,18 +2,21 @@
   "description": "BTP Image Deployment for QEMU",
   "builders": [{
     "type": "qemu",
-    "vm_name": "btp",
+    "vm_name": "BTP-{{isotime \"2006-01-02\"}}.qcow2",
     "http_directory": "precise",
     "iso_url": "http://releases.ubuntu.com/12.04/ubuntu-12.04.5-alternate-amd64.iso",
     "iso_checksum": "fa0893ffe2188a6daf918791cdccb480",
     "iso_checksum_type": "md5",
     "format": "qcow2",
     "headless": false,
-    "disk_size": 8192,
+    "accelerator": "kvm",
+    "disk_size": 10240,
     "ssh_username": "ubuntu",
     "ssh_password": "ubuntu",
     "ssh_port": 22,
     "ssh_wait_timeout": "60m",
+    "net_device": "virtio-net",
+    "disk_interface": "virtio",
     "boot_wait": "10s",
     "boot_command": [
       "<esc><esc><enter><wait>",
@@ -26,7 +29,7 @@
       "keyboard-configuration/variant=USA console-setup/ask_detect=false ",
       "initrd=/install/initrd.gz -- <enter>"
     ],
-    "output_directory": "output_qemu",
+    "output_directory": "qemu",
     "qemuargs": [
       [ "-m", "4096M" ],
       [ "-cpu", "host" ],
@@ -36,21 +39,13 @@
   "provisioners": [{
     "type": "shell",
     "scripts": [
-      "provisioners/common/preflight.sh",
-      "provisioners/common/prepare.sh",
-      "provisioners/common/misc.sh",
-      "provisioners/common/scm.sh",
-      "provisioners/common/compilers.sh",
-      "provisioners/common/libraries.sh",
-      "provisioners/common/java.sh",
-      "provisioners/common/puppet.sh",
-      "provisioners/common/postflight.sh",
-      "provisioners/nectar/banner.sh",
-      "provisioners/nectar/security.sh",
-      "provisioners/nectar/openstack-debian.sh",
-      "provisioners/nectar/fail2ban.sh",
-      "provisioners/nectar/cleanup.sh",
-      "provisioners/nectar/zerodisk.sh"
+      "provisioners/preflight.sh",
+      "provisioners/dependencies.sh",
+      "provisioners/tools.sh",
+      "provisioners/postflight.sh",
+      "provisioners/fail2ban.sh",
+      "provisioners/cleanup.sh",
+      "provisioners/zerodisk.sh"
       ],
       "pause_before": "10s",
       "override": {
