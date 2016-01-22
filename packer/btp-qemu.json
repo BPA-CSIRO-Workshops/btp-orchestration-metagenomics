@@ -42,6 +42,7 @@
       "provisioners/preflight.sh",
       "provisioners/dependencies.sh",
       "provisioners/tools.sh",
+      "provisioners/openstack.sh",
       "provisioners/postflight.sh",
       "provisioners/fail2ban.sh",
       "provisioners/cleanup.sh",
