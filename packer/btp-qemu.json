@@ -36,18 +36,24 @@
       [ "-smp", "1" ]
     ]
   }],
-  "provisioners": [{
-    "type": "shell",
-    "scripts": [
-      "provisioners/preflight.sh",
-      "provisioners/dependencies.sh",
-      "provisioners/tools.sh",
-      "provisioners/openstack.sh",
-      "provisioners/postflight.sh",
-      "provisioners/fail2ban.sh",
-      "provisioners/cleanup.sh",
-      "provisioners/zerodisk.sh"
-      ],
+  "provisioners": [
+    {
+      "type": "file",
+      "source": "files/cloud.cfg",
+      "destination": "/tmp/cloud.cfg"
+    },
+    {
+      "type": "shell",
+      "scripts": [
+        "provisioners/preflight.sh",
+        "provisioners/dependencies.sh",
+        "provisioners/tools.sh",
+        "provisioners/openstack.sh",
+        "provisioners/postflight.sh",
+        "provisioners/fail2ban.sh",
+        "provisioners/cleanup.sh",
+        "provisioners/zerodisk.sh"
+        ],
       "pause_before": "10s",
       "override": {
         "qemu": {
