@@ -8,7 +8,8 @@
     "ssh_username": "ubuntu",
     "ssh_port": 22,
     "region":"Melbourne",
-    "availability_zone": "monash-01"
+    "availability_zone": "monash-01",
+    "config_drive": "true"
   }],
   "provisioners": [
     {
