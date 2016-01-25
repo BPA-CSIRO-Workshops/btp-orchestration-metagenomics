@@ -12,7 +12,7 @@ dpkg -i nomachine_5.0.63_1_amd64.deb
 rm nomachine_5.0.63_1_amd64.deb
 
 # cloud-init
-echo 'datasource_list: [ Ec2 ]' | sudo -s tee /etc/cloud/cloud.cfg.d/90_dpkg.cfg
+echo 'datasource_list: [ Ec2 ]' | tee /etc/cloud/cloud.cfg.d/btp.cfg
 dpkg-reconfigure -f noninteractive cloud-init
 
 # Empty log files on the VM
@@ -20,6 +20,9 @@ find /var/log -type f -execdir truncate -s0 {} \;
 
 # Disable LTS Upgrade Notification
 sed -i 's/Prompt=lts/Prompt=never/g' /etc/update-manager/release-upgrades
+
+# Seed
+usermod -p $(openssl rand -base64 12) ubuntu
 
 # Clean apt
 apt-get -y clean all
