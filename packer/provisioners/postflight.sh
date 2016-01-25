@@ -8,7 +8,7 @@ apt-get install -y ubuntu-desktop
 # NX
 cd /tmp
 wget -4 --no-check-certificate https://swift.rc.nectar.org.au:8888/v1/AUTH_809/NX/nomachine_5.0.63_1_amd64.deb
-dpkg -i nomachine_5.0.63_1_amd64.deb nomachine_5.0.63_1_amd64.deb
+dpkg -i nomachine_5.0.63_1_amd64.deb
 rm nomachine_5.0.63_1_amd64.deb
 
 # Disable LTS Upgrade Notification
