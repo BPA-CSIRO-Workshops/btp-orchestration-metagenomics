@@ -20,6 +20,10 @@ Parameters:
       - "m1.large"
       - "m1.xlarge" 
       - "m1.xxlarge"
+      - "m2.xsmall"
+      - "m2.small"
+      - "m2.large"
+      - "m2.xlarge"
   InstanceCount:
     Description: "Number of instances to launch."
     Label: "Instance Count"
@@ -28,64 +32,40 @@ Parameters:
     Description: "ID of the NeCTAR image to be used for the instance."
     Label: "Image Name"
     Type: "String"
-    Default: "NGSTrainingV1.6"
+    Default: "BTP-2016-01-25"
     AllowedValues:
-      - "NGSTrainingV1.6"
+      - "BTP-2016-01-25"
   AvailabilityZone:
     Description: "NeCTAR availability zone where to launch the instance."
     Label: "Availability Zone"
     Type: "String"
     Default: "monash-01"
     AllowedValues: 
+      - "monash"
       - "monash-01"
       - "monash-02"
-      - "melbourne-qh2"
+      - "melbourne"
       - "melbourne-np"
-      - "qld"
-      - "NCI"
-      - "sa"
+      - "melbourne-qh2"
       - "tasmania"
-  UbuntuPassword:
+      - "tasmania-s"
+      - "intersect"
+      - "intersect-01"
+      - "intersect-02"
+      - "sa"
+      - "pawsey"
+      - "pawsey-01"
+      - "QRIScloud"
+      - "NCI"
+  TraineePassword:
     Description: "Password for the local ubuntu user."
-    Label: "Ubuntu Password"
+    Label: "Trainee Password"
     Type: "String"
     NoEcho: "True"
-  DataQualityModule:
-    Description: "Install the Data Quality module in the instance."
-    Label: "Install Data Quality Module?"
-    Type: "String"
-    Default: "Yes"
-    AllowedValues: 
-      - "Yes"
-      - "No"
-  ChIPSeqModule:
-    Description: "Install the ChIP-Seq module in the instance."
-    Label: "Install ChIP-Seq Module?"
-    Type: "String"
-    Default: "Yes"
-    AllowedValues: 
-      - "Yes"
-      - "No"
-  RNASeqModule:
-    Description: "Install the RNA-Seq module in the instance."
-    Label: "Install RNA-Seq Module?"
-    Type: "String"
-    Default: "Yes"
-    AllowedValues: 
-      - "Yes"
-      - "No"
-  DeNovoModule:
-    Description: "Install the de novo module in the instance."
-    Label: "Install de novo Module?"
-    Type: "String"
-    Default: "Yes"
-    AllowedValues: 
-      - "Yes"
-      - "No"
 
 Mappings:
-  NGSImageName:
-    "NGSTrainingV1.6": { NGSImageID: 2850afc2-4dc9-4ce6-9eb6-c3f4d8fd412c }
+  BTPImageName:
+    "BTP-2016-01-25": { BTPImageID: 9c7fd8ac-5cfe-4067-aae3-82e53a49def3 }
 
 Resources:
   NGSSecurityGroup:
@@ -101,21 +81,19 @@ Resources:
           FromPort: "22"
           ToPort: "22"
           CidrIp: "0.0.0.0/0"
+        - IpProtocol: "tcp"
+          FromPort: "4000"
+          ToPort: "4000"
+          CidrIp: "0.0.0.0/0"
       
   NGSInstance:
     Type: "AWS::EC2::Instance"
-    Metadata:
-      AWS::CloudFormation::Init:
-        config:
-          packages:
-            apt:
-              freenx-server: []
     Properties:
       ImageId:
         Fn::FindInMap:
-          - NGSImageName
+          - BTPImageName
           - { Ref: ImageName}
-          - NGSImageID
+          - BTPImageID
       InstanceType: { Ref: InstanceType }
       KeyName: { Ref: KeyName }
       SecurityGroups:
@@ -125,19 +103,30 @@ Resources:
       UserData:
         Fn::Base64:
           Fn::Replace:
-            - ubuntu_password: { Ref: UbuntuPassword }
+            - trainee_password: { Ref: TraineePassword }
             - |
               #!/bin/bash
-              echo "Bootstrapping NGS Instance ..."
-              # Set user password
-              echo "Setting password for ubuntu user ..."
-              echo -e "ubuntu:ubuntu_password" | chpasswd
-              # Set hostname
-              echo "127.0.0.1 $HOSTNAME" | tee -a /etc/hosts
-              # Download datasets
-              echo "Download relevant datasets, tools from NeCTAR Object Storage ..."
-              cd /home/ubuntu
-              wget https://raw.githubusercontent.com/BPA-CSIRO-Workshops/btp-catalogue/master/ngs-workshop/ngs_workshop.pp
-              wget https://raw.githubusercontent.com/BPA-CSIRO-Workshops/btp-catalogue/master/ngs-workshop/ngs_workshop.yaml
-              wget https://raw.githubusercontent.com/BPA-CSIRO-Workshops/btp-catalogue/master/ngs-workshop/hiera.yaml
-              puppet apply ngs_workshop.pp --hiera_config ./hiera.yaml
+              if [ ! -e "/tmp/btp-workshop-ngs" ]; then
+                  cd /tmp;
+                  git clone --recurse-submodules https://github.com/BPA-CSIRO-Workshops/btp-workshop-ngs.git;
+              fi
+              cd /tmp/btp-workshop-ngs;
+
+              # Datasets
+              find . -type f -name 'data.yaml' | while read module; do
+                  module_name=`echo $module | awk -F '/' '{ print $2 }'`;
+                  cat > /etc/puppet/$module_name-datasets-hiera.yaml << EOF
+              ---
+              :backends:
+                - yaml
+              :yaml:
+                :datadir: '/etc/puppet/'
+              :hierarchy:
+                - $module_name-datasets
+              EOF
+                  cp $module /etc/puppet/$module_name-datasets.yaml;
+                  puppet apply --verbose --parser future orchestration/puppet/btp-datasets.pp --hiera_config=/etc/puppet/$module_name-datasets-hiera.yaml;
+              done;    
+              echo "Setting password for trainee user ..."
+              echo -e "trainee:trainee_password" | sudo chpasswd
+
