@@ -93,7 +93,6 @@ class btp {
   $parent_path = hiera('btp::parent_path', '/mnt/workshop')
   $data_dir = hiera('btp::data_dir', 'data')
   $trainee_user = hiera('btp::trainee_user', 'trainee')
-  $trainee_uid = hiera('btp::trainee_uid', 1001)
   $modules = hiera('btp::modules', {})
 
   $data_path = "${parent_path}/${data_dir}"
@@ -120,7 +119,6 @@ class btp {
   # Trainee user
   user { $trainee_user:
     ensure  => present,
-    uid     => $trainee_uid,
     gid     => $trainee_user,
     shell   => '/bin/bash',
     home    => "/home/${trainee_user}",
