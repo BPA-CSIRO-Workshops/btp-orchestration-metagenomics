@@ -211,6 +211,46 @@ It is important at this point to take note of the BTP instance's IP address as t
 
 ### Accessing the BTP Instance
 
+The recommended way for accessing the BTP instances is via remote desktop. NoMachine is configured on the BTP images and remote desktop access is done using `NX` protocol. Once NoMachine is installed on the client machine, it can then be launched to start the connection to the BTP instance:
+
+![NX 01][nx-01]
+
+After clicking on `New` button, the new connection configuration is initiated:
+
+![NX 02][nx-02]
+
+`NX` protocol must chosen for the remote desktop connection, then click on `Continue` to go to the next panel:
+
+![NX 03][nx-03]
+
+The BTP instance's IP address is then entered into `Host` field, using the default `NX` port `4000` as is, then click on `Continue` to go the next panel:
+
+![NX 04][nx-04]
+
+For the authentication method, `Password` is then chosen as the `Trainee Password` will be used to connect to the BTP instance. Once the password has been entered, the `Continue` button can then be clicked to advance to the next panel:
+
+![NX 05][nx-05]
+
+The BTP instance will be access directly network-wise, so the `Don't use a proxy` option is chosen, then click on the `Continue` button to advance to the last configuration panel:
+
+![NX 06][nx-06]
+
+The connection can then be named on the last panel. After a suitable name has been entered, the `Done` button can be clicked to get back to the main connections page:
+
+![NX 07][nx-07]
+
+By choosing on the now saved connection and clicking on the `Connect` button, the connection will commence. Once connection to the BTP instance is estabilished, the login prompt will be presented:
+
+![NX 08][nx-08]
+
+The username configured for the workshop will be `trainee` and the password will be the one entered for the `Trainee Password` paramater upon launch of the `heat` template on the NeCTAR Research Cloud orchestration service. Once the username and password information has been entered, the `OK` button can be clicked to open the remote desktop session:
+
+![NX 09][nx-09]
+
+Now the BTP instance can be used just like a normal desktop environment. Applications and analysis tools can be used and launched just like from a normal desktop:
+
+![NX 10][nx-10]
+
 AWS
 ---
 <TODO>
@@ -250,3 +290,13 @@ please see: http://creativecommons.org/licenses/by/3.0/deed.en_GB
 [nectar-db-05]: images/nectar-db-05.png
 [nectar-db-06]: images/nectar-db-06.png
 [nectar-db-07]: images/nectar-db-07.png
+[nx-01]: images/nx-01.png
+[nx-02]: images/nx-02.png
+[nx-03]: images/nx-03.png
+[nx-04]: images/nx-04.png
+[nx-05]: images/nx-05.png
+[nx-06]: images/nx-06.png
+[nx-07]: images/nx-07.png
+[nx-08]: images/nx-08.png
+[nx-09]: images/nx-09.png
+[nx-10]: images/nx-10.png
