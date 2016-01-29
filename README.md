@@ -165,20 +165,20 @@ NeCTAR
 ------
 Included in this repository is a `heat` template (`ngs-cfn.yaml`) that can be used on NeCTAR Research Cloud's [orchestration][nectar-rc-heat] service. The `heat` template (`ngs-cfn.yaml`) can be used directly on the [NeCTAR Dashboard][nectar-dashboard]. So first, one must login to the dashboard:
 
-![NeCTAR Dashboard][nectar-db-dg]
+![NeCTAR Dashboard 01][nectar-db-01]
 
 The orchestration service is then accessible from the left panel of the dashboard:
 
-![NeCTAR Dashboard-Orchestration][nectar-db-orch-dg]
+![NeCTAR Dashboard 02][nectar-db-02]
 
 We can then initiate the process by clicking on the `Launch Stack` button on the top right section of the dashboard. This will trigger a pop-up menu to appear for selecting the `heat` template to run:
 
-![NeCTAR Dashboard-Template][nectar-db-seltel-dg]
+![NeCTAR Dashboard 03][nectar-db-03]
 
 Make the `Template Source` as `File`, the then click on `Choose File`.
 Now navigate to the workshop directory on your computer, in the top level path, there'll be a subdirectory called `orchestration`, open this directory, inside this, there'll be another subdirectory called `heat`, open this again and choose the `ngs-cfn.yaml` template inside it. Once the template file has been located and chosen, click on `Next` to got to the template input page:
 
-![NeCTAR Dashboard-TemplateIn][nectar-db-telin-dg]
+![NeCTAR Dashboard 04][nectar-db-04]
 
 The following parameters are mandatory for launching the `heat` template:
 * `Stack Name`
@@ -191,7 +191,19 @@ The following parameters are mandatory for launching the `heat` template:
 
 `Stack Name` as the name suggests, just names the stack upon launch. This can be any name. The `Availability Zone` parameter allows users to choose where to launch the BTP instances on the NeCTAR Research Cloud. More information about availability zones can be found on this [support site][nectar-azs]. The `Image Name` contains a list of currently active and maintained BTP images. It's recommended to use the latest BTP image from the list. Multiple BTP instances can be launched simultaneously by entering the desired number in the `Instance Count` parameter. The size of the BTP instance/s in terms of vCPU count, memory and on-instance storage can be chosen by adjusting the `Instance Type` list. More information about instance types can be found on this [support site][nectar-resources]. The name of a key pair must be entered into the `Key Name` parameter. This key will be injected to the `root` user on the BTP instance and is used to access the BTP instances for administrative tasks. More information about key pairs can be found on this [support site][nectar-keypairs]. Lastly, the `Trainee Password` parameter is used for connecting to the launched BTP instance's using the trainee user. The trainee use's environment will be configured with the training modules associated to the workshop.
 
-Once the parameters are completely filled, the launch process can be kicked-off by clicking the `Launch` button.
+Once the parameters are completely filled, the launch process can be kicked-off by clicking the `Launch` button. The newly created stack with its status will then be shown on the dashboard:
+
+![NeCTAR Dashboard 05][nectar-db-05]
+
+While still on the dashboard, clicking on the name of the stack will display more informational tabs about the created stack. The `Resources` tab will show the resources created by the stack on the NeCTAR Research Cloud:
+
+![NeCTAR Dashboard 06][nectar-db-06]
+
+The `heat` stack creates two resources for a BTP instance, `AWS::EC2::Instance` and `AWS::EC2::SecurityGroup`. More information about these resources and other resources supported by the NeCTAR Research Cloud orchestration service can be found on this [support page][nectar-heat-resources]. The BTP instance is configured in the background. This is when the training modules and its datasets for the workshop are pulled from object storage and installed on the BTP instance. This process normally takes several minutes to complete. Once the stack creation is completed as reflected on its status on the dashboard, the BTP instance will then appear on the instances section of the dashboard:
+
+![NeCTAR Dashboard 07][nectar-db-07]
+
+It is important at this point to take note of the BTP instance's IP address as this will be used for remote desktop access later on using the [NoMachine][nomachine] remote desktop client.
 
 AWS
 ---
@@ -216,15 +228,19 @@ please see: http://creativecommons.org/licenses/by/3.0/deed.en_GB
 [nectar-azs]: https://support.rc.nectar.org.au/docs/availability-zones
 [nectar-keypairs]: https://support.rc.nectar.org.au/docs/keypairs
 [nectar-resources]: https://support.rc.nectar.org.au/docs/resources-available
+[nectar-heat-resources]: https://support.rc.nectar.org.au/docs/heat-supported-resources
 [aws]: https://aws.amazon.com/
 [aws-free]: https://aws.amazon.com/free/
 [python-glanceclient]: https://github.com/openstack/python-glanceclient
 [python-novaclient]: https://github.com/openstack/python-novaclient
 [python-heatclient]: https://github.com/openstack/python-heatclient
+[nomachine]: https://www.nomachine.com/
 
 <!-- Figures -->
-[nectar-db-dg]: images/nectar-db-dg.png
-[nectar-db-orch-dg]: images/nectar-db-orch-dg.png
-[nectar-db-seltel-dg]: images/nectar-db-seltel-dg.png
-[nectar-db-telin-dg]: images/nectar-db-telin-dg.png
-[nectar-db-stlaun-dg]: images/nectar-db-stlaun-dg.png
+[nectar-db-01]: images/nectar-db-01.png
+[nectar-db-02]: images/nectar-db-02.png
+[nectar-db-03]: images/nectar-db-03.png
+[nectar-db-04]: images/nectar-db-04.png
+[nectar-db-05]: images/nectar-db-05.png
+[nectar-db-06]: images/nectar-db-06.png
+[nectar-db-07]: images/nectar-db-07.png
