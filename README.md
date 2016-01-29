@@ -55,6 +55,10 @@ AWS Credentials
 ---------------
 An AWS account is required to be able to use the BTP on AWS. More information can be found on the [AWS website][aws]. AWS also provides a [free tier][aws-free] service to get users started quickly.
 
+NoMachine
+---------
+NoMachine remote desktop server is installed on the BTP images for the NeCTAR Research Cloud and AWS. To be able to connect to the BTP instances on the cloud, NoMachine must be installed on the client machine. It is available for the major operating systems (e.g Windows, Linux and Mac OS X). More information about NoMachine and links to its package installers for the various platforms can be found on its [website][NoMachine].
+
 Creating BTP Images
 ===================
 The following section outlines the steps for creating BTP images for the various platforms.
@@ -204,6 +208,8 @@ The `heat` stack creates two resources for a BTP instance, `AWS::EC2::Instance` 
 ![NeCTAR Dashboard 07][nectar-db-07]
 
 It is important at this point to take note of the BTP instance's IP address as this will be used for remote desktop access later on using the [NoMachine][nomachine] remote desktop client.
+
+### Accessing the BTP Instance
 
 AWS
 ---
