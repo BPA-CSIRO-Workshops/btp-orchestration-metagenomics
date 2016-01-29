@@ -207,9 +207,14 @@ The `heat` stack creates two resources for a BTP instance, `AWS::EC2::Instance` 
 
 ![NeCTAR Dashboard 07][nectar-db-07]
 
-It is important at this point to take note of the BTP instance's IP address as this will be used for remote desktop access later on using the [NoMachine][nomachine] remote desktop client.
+It is important at this point to take note of the BTP instance's IP address as this will be used for remote desktop access later on using the [NoMachine][nomachine] remote desktop client. After using the BTP instance, the stack together with its created resources can be deleted from the dashboard by going to `Orchestration` -> `Stacks` -> `Actions` -> `Delete Stack`.
 
-### Accessing the BTP Instance
+AWS
+---
+<TODO>
+
+Accessing BTP Instances
+=======================
 
 The recommended way for accessing the BTP instances is via remote desktop. NoMachine is configured on the BTP images and remote desktop access is done using `NX` protocol. Once NoMachine is installed on the client machine, it can then be launched to start the connection to the BTP instance:
 
@@ -250,10 +255,6 @@ The username configured for the workshop will be `trainee` and the password will
 Now the BTP instance can be used just like a normal desktop environment. Applications and analysis tools can be used and launched just like from a normal desktop:
 
 ![NX 10][nx-10]
-
-AWS
----
-<TODO>
 
 License
 =======
