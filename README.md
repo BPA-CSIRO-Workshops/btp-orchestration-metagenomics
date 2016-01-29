@@ -69,11 +69,13 @@ VirtualBox and VMWare
 
 [Install VirtualBox or VMWare](#prerequisites)
 
-Clone the BPA-CSIRO BTP NGS Workshop repository
+<!-- WORKSHOP DYNAMIC -->
+Clone the BPA-CSIRO BTP NGS workshop repository:
 ```
 git clone https://github.com/BPA-CSIRO-Workshops/btp-workshop-ngs.git
 ```
 
+<!-- WORKSHOP DYNAMIC -->
 Pull the training submodules
 ```
 cd btp-workshop-ngs
@@ -100,12 +102,14 @@ The resulting `vmware` and `virtualbox` stand-alone images, can be easily shared
 NeCTAR
 ------
 
-Clone the BPA-CSIRO BTP NGS Workshop repository
+<!-- WORKSHOP DYNAMIC -->
+Clone the BPA-CSIRO BTP NGS Workshop repository:
 ```
 git clone https://github.com/BPA-CSIRO-Workshops/btp-workshop-ngs.git
 ```
 
-Pull the training modules
+<!-- WORKSHOP DYNAMIC -->
+Pull the training modules:
 ```
 cd btp-workshop-ngs
 git submodule update --init --recursive
@@ -128,12 +132,15 @@ Packer will launch an instance on the NeCTAR Research Cloud from a base Ubuntu L
 
 AWS
 ---
-Clone the BPA-CSIRO BTP NGS Workshop Repo
+
+<!-- WORKSHOP DYNAMIC -->
+Clone the BPA-CSIRO BTP NGS workshop repository:
 ```
 git clone https://github.com/BPA-CSIRO-Workshops/btp-workshop-ngs.git
 ```
 
-Pull the training sub modules
+<!-- WORKSHOP DYNAMIC -->
+Pull the training sub modules for the workshop from GitHub:
 ```
 cd btp-workshop-ngs
 git submodule update --init --recursive
@@ -161,10 +168,12 @@ Launching BTP Instances
 =======================
 This section outlines the steps to launch BTP instances on the various environments.
 
+<!-- WORKSHOP DYNAMIC -->
 VirtualBox and VMWare
 ---------------------
 The VirtualBox and VMWare images are available for download from the BTP workshop [release page][btp-ngs-release]. Once the image is downloaded, it can be loaded into VirtualBox and VMWare.
 
+<!-- WORKSHOP DYNAMIC -->
 NeCTAR
 ------
 Included in this repository is a `heat` template (`ngs-cfn.yaml`) that can be used on NeCTAR Research Cloud's [orchestration][nectar-rc-heat] service. The `heat` template (`ngs-cfn.yaml`) can be used directly on the [NeCTAR Dashboard][nectar-dashboard]. So first, one must login to the dashboard:
@@ -177,6 +186,7 @@ The orchestration service is then accessible from the left panel of the dashboar
 
 We can then initiate the process by clicking on the `Launch Stack` button on the top right section of the dashboard. This will trigger a pop-up menu to appear for selecting the `heat` template to run:
 
+<!-- WORKSHOP DYNAMIC -->
 ![NeCTAR Dashboard 03][nectar-db-03]
 
 Make the `Template Source` as `File`, the then click on `Choose File`.
@@ -208,6 +218,25 @@ The `heat` stack creates two resources for a BTP instance, `AWS::EC2::Instance` 
 ![NeCTAR Dashboard 07][nectar-db-07]
 
 It is important at this point to take note of the BTP instance's IP address as this will be used for remote desktop access later on using the [NoMachine][nomachine] remote desktop client. After using the BTP instance, the stack together with its created resources can be deleted from the dashboard by going to `Orchestration` -> `Stacks` -> `Actions` -> `Delete Stack`.
+
+<!-- WORKSHOP DYNAMIC -->
+The `heat` template (`ngs-cfn.yaml`) can also be launched from the command line using the `python-heatclient`, which interacts with the [NeCTAR API][nectar-api]. To launch the template from the command line, `python-heatclient` must first be installed and the OpenStack credentials file from the NeCTAR Dashboard downloaded on the client machine. Source the credentials file:
+```
+source openrc.sh
+```
+
+<!-- WORKSHOP DYNAMIC -->
+Then execute the `heat` command with the required parameters. The parameters listed above when using the template from the NeCTAR Dashboard can be configured from the command line:
+```
+heat stack-create -f ngs-cfn.yaml -P "KeyName=cloudcentral;InstanceType=m1.small;InstanceCount=1;ImageName=BTP-2016-01-25;AvailabilityZone=monash-01;TraineePassword=B$dP@ssW0rd" BTP-01
++--------------------------------------+------------+--------------------+---------------------+--------------+
+| id                                   | stack_name | stack_status       | creation_time       | updated_time |
++--------------------------------------+------------+--------------------+---------------------+--------------+
+| fb25d83f-771b-4bf4-abf7-f9c23186a661 | BTP-01     | CREATE_IN_PROGRESS | 2016-01-26T23:28:14 | None         |
++--------------------------------------+------------+--------------------+---------------------+--------------+
+```
+
+In the sample command above, the parameters are supplied after the `-P` flag. After issuing the `heat` command, it returns the stack information including its creation status. To check on the status of the created stack, the `heat stack-list` command can be used. Once the stack has been created, the created resources, the BTP instance can then be accessed using NoMachine remote desktop.
 
 AWS
 ---
@@ -266,6 +295,7 @@ please see: http://creativecommons.org/licenses/by/3.0/deed.en_GB
 [virtualbox]: http://www.vmware.com/products/fusion/overview.html
 [vmware-fusion]: http://www.vmware.com/products/fusion/overview.html
 [vmware-workstation]: http://www.vmware.com/products/fusion/overview.html
+<!-- WORKSHOP DYNAMIC -->
 [btp-ngs-release]: https://github.com/BPA-CSIRO-Workshops/btp-workshop-ngs/releases
 [nectar-rc]: https://nectar.org.au/research-cloud/
 [nectar-rc-heat]: https://support.rc.nectar.org.au/docs/heat
