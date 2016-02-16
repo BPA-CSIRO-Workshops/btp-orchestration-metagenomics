@@ -61,7 +61,7 @@ NoMachine remote desktop server is installed on the BTP images for the NeCTAR Re
 
 Creating BTP Images
 ===================
-The following section outlines the steps for creating BTP images for the various platforms.
+The following section outlines the steps for creating BTP images for the NeCTAR Research Cloud and AWS, as well as stand-alone virtual machine images that can be used directly on VirtualBox and VMWare.
 
 VirtualBox and VMWare
 ---------------------
