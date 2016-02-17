@@ -102,20 +102,22 @@ The resulting `vmware` and `virtualbox` stand-alone images, can be easily shared
 NeCTAR
 ------
 
+There are prebuilt BTP images available on the NeCTAR Research Cloud. These images are created and maintained by the workshop developers and organisers. It can be launched on any of the availability zones of the NeCTAR Research Cloud. More information about the NeCTAR Research Cloud is available on its [website][nectar-rc]. Information about NeCTAR availability zones is available on this [page][nectar-azs].
+
+First thing to do is to clone the BTP workshop repository. Clone the BPA-CSIRO BTP NGS Workshop repository:
 <!-- WORKSHOP DYNAMIC -->
-Clone the BPA-CSIRO BTP NGS Workshop repository:
 ```
 git clone https://github.com/BPA-CSIRO-Workshops/btp-workshop-ngs.git
 ```
 
+A BTP workshop is composed of a number of training modules, each configured as a submodule inside the workshop repository. The submodules must be pulled from GitHub as well.Pull the training modules:
 <!-- WORKSHOP DYNAMIC -->
-Pull the training modules:
 ```
 cd btp-workshop-ngs
 git submodule update --init --recursive
 ```
 
-Source the OpenStack credentials file downloaded from the NeCTAR Dashboard for the desired user/tenant:
+The next step is to source the NeCTAR OpenStack credentials file. This is used for interacting with the NeCTAR API. Source the OpenStack credentials file downloaded from the NeCTAR Dashboard for the desired user/tenant:
 ```
 source openrc.sh
 ```
@@ -128,7 +130,7 @@ cd orchestration/packer/
 packer build btp-nectar.json
 ```
 
-Packer will launch an instance on the NeCTAR Research Cloud from a base Ubuntu LTS image. It will then continue to configure the instance with the required libraries, remote desktop server and analysis tools. Once this is completed, a `snapshot` of the instance will be created. This snapshot is then made available as the new BTP image across all availability zones in the NeCTAR Research Cloud. The new image can the be instantiated into instances from the [NeCTAR Dashboard][nectar-dashboard] or using the [NeCTAR API][nectar-api]. The workflows below describes how to use the included `heat` templates and sample commands for automated deployment of the BTP.
+Packer will launch an instance on the NeCTAR Research Cloud from a base Ubuntu LTS image. It will then continue to configure the instance with the required libraries, remote desktop server and analysis tools. Once this is completed, a `snapshot` of the instance will be created. This snapshot is then made available as the new BTP image across all availability zones in the NeCTAR Research Cloud. The new image can the be launched into instances from the [NeCTAR Dashboard][nectar-dashboard] or using the [NeCTAR API][nectar-api]. The workflows below describes how to use the included `heat` templates and sample commands for automated deployment of the BTP.
 
 AWS
 ---
@@ -176,7 +178,22 @@ The VirtualBox and VMWare images are available for download from the BTP worksho
 <!-- WORKSHOP DYNAMIC -->
 NeCTAR
 ------
-Included in this repository is a `heat` template (`ngs-cfn.yaml`) that can be used on NeCTAR Research Cloud's [orchestration][nectar-rc-heat] service. The `heat` template (`ngs-cfn.yaml`) can be used directly on the [NeCTAR Dashboard][nectar-dashboard]. So first, one must login to the dashboard:
+
+Included in this repository is a `heat` template (`ngs-cfn.yaml`) that can be used on NeCTAR Research Cloud's [orchestration][nectar-rc-heat] service. The `heat` template (`ngs-cfn.yaml`) can be used directly on the [NeCTAR Dashboard][nectar-dashboard]. To get the `heat` template, the BTP workshop repository and its submodules must be cloned from GitHub first:
+
+<!-- WORKSHOP DYNAMIC -->
+Clone the BPA-CSIRO BTP NGS workshop repository:
+```
+git clone https://github.com/BPA-CSIRO-Workshops/btp-workshop-ngs.git
+```
+<!-- WORKSHOP DYNAMIC -->
+Pull the training submodules
+```
+cd btp-workshop-ngs
+git submodule update --init --recursive
+```
+
+Then the user can login to the dashboard:
 
 ![NeCTAR Dashboard 01][nectar-db-01]
 
@@ -194,14 +211,7 @@ Now navigate to the workshop directory on your computer, in the top level path, 
 
 ![NeCTAR Dashboard 04][nectar-db-04]
 
-The following parameters are mandatory for launching the `heat` template:
-* `Stack Name`
-* `Availability Zone`
-* `Image Name`
-* `Instance Count`
-* `Instance Type`
-* `Key Name`
-* `Trainee Password`
+The following parameters are mandatory for launching the `heat` template: `Stack Name`, `Availability Zone`, `Image Name`, `Instance Count`, `Instance Type`, `Key Name` and `Trainee Password`.
 
 `Stack Name` as the name suggests, just names the stack upon launch. This can be any name. The `Availability Zone` parameter allows users to choose where to launch the BTP instances on the NeCTAR Research Cloud. More information about availability zones can be found on this [support site][nectar-azs]. The `Image Name` contains a list of currently active and maintained BTP images. It's recommended to use the latest BTP image from the list. Multiple BTP instances can be launched simultaneously by entering the desired number in the `Instance Count` parameter. The size of the BTP instance/s in terms of vCPU count, memory and on-instance storage can be chosen by adjusting the `Instance Type` list. More information about instance types can be found on this [support site][nectar-resources]. The name of a key pair must be entered into the `Key Name` parameter. This key will be injected to the `root` user on the BTP instance and is used to access the BTP instances for administrative tasks. More information about key pairs can be found on this [support site][nectar-keypairs]. Lastly, the `Trainee Password` parameter is used for connecting to the launched BTP instance's using the trainee user. The trainee use's environment will be configured with the training modules associated to the workshop.
 
@@ -217,7 +227,7 @@ The `heat` stack creates two resources for a BTP instance, `AWS::EC2::Instance` 
 
 ![NeCTAR Dashboard 07][nectar-db-07]
 
-It is important at this point to take note of the BTP instance's IP address as this will be used for remote desktop access later on using the [NoMachine][nomachine] remote desktop client. After using the BTP instance, the stack together with its created resources can be deleted from the dashboard by going to `Orchestration` -> `Stacks` -> `Actions` -> `Delete Stack`.
+It is important at this point to take note of the BTP instance's IP address as this will be used for remote desktop access later on using the [NoMachine][nomachine] remote desktop client. After using the BTP instance, the stack together with its created resources can be deleted from the dashboard by going to `Orchestration -> Stacks -> Actions -> Delete Stack`.
 
 <!-- WORKSHOP DYNAMIC -->
 The `heat` template (`ngs-cfn.yaml`) can also be launched from the command line using the `python-heatclient`, which interacts with the [NeCTAR API][nectar-api]. To launch the template from the command line, `python-heatclient` must first be installed and the OpenStack credentials file from the NeCTAR Dashboard downloaded on the client machine. Source the credentials file:
@@ -240,7 +250,67 @@ In the sample command above, the parameters are supplied after the `-P` flag. Af
 
 AWS
 ---
-<TODO>
+
+To launch BTP instances on AWS, a `cloudformation` template compatible with [AWS CloudFormation][aws-cloudformation] has been developed. This template is included within the orchestration submodule (this repository) of the BTP workshop repository. This `cloudformation` template can be used to launch a single BTP instance from the [AWS Console][aws-console] or using the [AWS CLI][aws-cli]. The following steps will first highlight how to launch the BTP instance using [AWS Console][aws-console]. The BTP workshop repository and its submodules must be cloned first from GitHub to get the `cloudformation` template:
+
+<!-- WORKSHOP DYNAMIC -->
+Clone the BPA-CSIRO BTP NGS workshop repository:
+```
+git clone https://github.com/BPA-CSIRO-Workshops/btp-workshop-ngs.git
+```
+<!-- WORKSHOP DYNAMIC -->
+Pull the training submodules
+```
+cd btp-workshop-ngs
+git submodule update --init --recursive
+
+Then the user can login to the console:
+
+![AWS Console 01][aws-cs-01]
+
+There's also an option in the console login page to create a new account for new users. Once logged-in, the main page, providing an overview of all AWS services is presented:
+
+![AWS Console 02][aws-cs-02]
+
+Before using CloudFormation to launch the BTP instance, the user must have a valid `key pair`. This will be used by the `cloudformation` template for accessing the BTP instance with `sudo` privileges. From the main console page, click on the `EC2` service. 
+
+![AWS Console 03][aws-cs-03]
+
+From the left panel, access the `NETWORK & SECURITY -> Key Pairs` menu. This will bring the keypair page, click on `Create Key Pair`:
+
+![AWS Console 04][aws-cs-04]
+
+Following the prompt on the next page for creating the new keypair. It is important to remember the keypair name. This will be used later when launching the BTP instance using CloudFormation. The CloudFormation service can then be accessed by going to `Services -> Management Tools -> CloudFormation`:
+
+![AWS Console 05][aws-cs-05]
+
+The CloudFormation page will then be presented, giving a number of options to get started. Choose (click) the `Create New Stack`:
+
+![AWS Console 06][aws-cs-06]
+
+On the next page, various options are presented for loading the template. Choose (click) the `Choose a template` and tick the `Upload a template to Amazon S3`, then click on `Choose file`:
+
+![AWS Console 07][aws-cs-07]
+<!-- WORKSHOP DYNAMIC -->
+Locate where the BTP workshop repository has been cloned, then navigate to the `orchestration\cloudformation` subdirectory, choose the `ngs.json` template file, then click on `Open`:
+
+![AWS Console 08][aws-cs-08]
+
+Once the `ngs.json` file has been loaded into CloudFormation, the parameters page will be presented. This is where the required parameters to launch the BTP instance must be completed. The following parameters are mandatory for launching the `cloudformation` template: `Stack name`, `InstanceType`, `KeyName`, `SSHLocation`, and `Trainee Password`.
+
+`Stack name` is simply what string to name the newly created stack. `InstanceType` defines the size of the instance to be created, in terms of computational and storage resources. Note that instance types are charged differently. `KeyName` is the name of the keypair to assign to the instance user (ubuntu) that has `sudo` privileges. `SSHLocation` provides a mechanism to restrict access to the instance. This option can be set to specific network ranges so only clients from that range can access the instance. The example below configures the instance to be accessible from anywhere. Lastly, `Trainee Password` is the password to assign the workshop trainee user, for remote desktop access.
+
+Once these parameters have been completed, click on the `Next` button to progress to the next page. 
+
+![AWS Console 09][aws-cs-09]
+
+Continue going to the next page until the review page is presented. This page provides a quick summary of the parameters to be used for the creation of the BTP instance. Once satisfied, click on `Create` to start the orchestration process:
+
+![AWS Console 10][aws-cs-10]
+
+This will direct to the stack status page, in here, the new stack's status can be monitored.
+
+![AWS Console 11][aws-cs-11]
 
 Accessing BTP Instances
 =======================
@@ -298,6 +368,7 @@ please see: http://creativecommons.org/licenses/by/3.0/deed.en_GB
 <!-- WORKSHOP DYNAMIC -->
 [btp-ngs-release]: https://github.com/BPA-CSIRO-Workshops/btp-workshop-ngs/releases
 [nectar-rc]: https://nectar.org.au/research-cloud/
+[nectar-azs]: https://support.rc.nectar.org.au/docs/availability-zones
 [nectar-rc-heat]: https://support.rc.nectar.org.au/docs/heat
 [nectar-authentication]: https://support.rc.nectar.org.au/docs/authentication
 [nectar-dashboard]: https://support.rc.nectar.org.au/docs/dashboard
@@ -307,6 +378,9 @@ please see: http://creativecommons.org/licenses/by/3.0/deed.en_GB
 [nectar-resources]: https://support.rc.nectar.org.au/docs/resources-available
 [nectar-heat-resources]: https://support.rc.nectar.org.au/docs/heat-supported-resources
 [aws]: https://aws.amazon.com/
+[aws-console]: https://aws.amazon.com/console/
+[aws-cli]: https://aws.amazon.com/cli/
+[aws-cloudformation]: https://aws.amazon.com/cloudformation/
 [aws-free]: https://aws.amazon.com/free/
 [python-glanceclient]: https://github.com/openstack/python-glanceclient
 [python-novaclient]: https://github.com/openstack/python-novaclient
@@ -321,6 +395,17 @@ please see: http://creativecommons.org/licenses/by/3.0/deed.en_GB
 [nectar-db-05]: images/nectar-db-05.png
 [nectar-db-06]: images/nectar-db-06.png
 [nectar-db-07]: images/nectar-db-07.png
+[aws-cs-01]: images/aws-cs-01.png
+[aws-cs-02]: images/aws-cs-02.png
+[aws-cs-03]: images/aws-cs-03.png
+[aws-cs-04]: images/aws-cs-04.png
+[aws-cs-05]: images/aws-cs-05.png
+[aws-cs-06]: images/aws-cs-06.png
+[aws-cs-07]: images/aws-cs-07.png
+[aws-cs-08]: images/aws-cs-08.png
+[aws-cs-09]: images/aws-cs-09.png
+[aws-cs-10]: images/aws-cs-10.png
+[aws-cs-11]: images/aws-cs-11.png
 [nx-01]: images/nx-01.png
 [nx-02]: images/nx-02.png
 [nx-03]: images/nx-03.png
