@@ -308,9 +308,17 @@ Continue going to the next page until the review page is presented. This page pr
 
 ![AWS Console 10][aws-cs-10]
 
-This will direct to the stack status page, in here, the new stack's status can be monitored.
+This will direct to the stack status page, in here, the new stack's status can be monitored:
 
 ![AWS Console 11][aws-cs-11]
+
+After several minutes, the stack creation will then be completed as stated on its status:
+
+![AWS Console 12][aws-cs-12]
+
+The `cloudformation` template will launch the BTP instance on EC2. The instance state can be verified by goint to the EC2 service page, then navigating to `Instances -> Instances` from the left panel:
+
+![AWS Console 13][aws-cs-13]
 
 Accessing BTP Instances
 =======================
@@ -406,6 +414,8 @@ please see: http://creativecommons.org/licenses/by/3.0/deed.en_GB
 [aws-cs-09]: images/aws-cs-09.png
 [aws-cs-10]: images/aws-cs-10.png
 [aws-cs-11]: images/aws-cs-11.png
+[aws-cs-12]: images/aws-cs-12.png
+[aws-cs-13]: images/aws-cs-13.png
 [nx-01]: images/nx-01.png
 [nx-02]: images/nx-02.png
 [nx-03]: images/nx-03.png
