@@ -361,7 +361,7 @@ The username configured for the workshop will be `trainee` and the password will
 
 Now the BTP instance can be used just like a normal desktop environment. Applications and analysis tools can be used and launched just like from a normal desktop:
 
-![NX 10][nx-10]
+[NX 10][nx-10]
 
 License
 =======
