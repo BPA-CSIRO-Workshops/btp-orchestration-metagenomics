@@ -31,10 +31,12 @@ Prerequisites
 
 Packer
 ------
-In order to build the images using the recipes, Packer must be installed on the client machine. 
-Packer packages are available for most platforms (Windows, Linux and OS X) and can be downloaded 
-from the [Packer website](https://www.packer.io/downloads.html). Once installed,
-the `packer` command line tool will be available on the system.
+In order to build the images using the recipes, 
+Packer must be installed on the client machine. 
+Packer packages are available for most platforms (Windows, 
+Linux and OS X) and can be downloaded from the
+[Packer website](https://www.packer.io/downloads.html). 
+Once installed, the `packer` command line tool will be available on the system.
 
 VirtualBox
 ----------
@@ -63,7 +65,8 @@ To launch the BTP using the NeCTAR API, the following OpenStack clients must be 
 
 AWS Credentials
 ---------------
-An AWS account is required to be able to use the BTP on AWS. More information can be found on the [AWS website][aws]. 
+An AWS account is required to be able to use the BTP on AWS. 
+More information can be found on the [AWS website][aws]. 
 AWS also provides a [free tier][aws-free] service to get users started quickly.
 
 NoMachine
@@ -86,16 +89,9 @@ VirtualBox and VMWare
 [Install VirtualBox or VMWare](#prerequisites)
 
 <!-- WORKSHOP DYNAMIC -->
-Clone the BPA-CSIRO BTP NGS workshop repository:
+Clone the BPA-CSIRO BTP NGS workshop repository and its submodules:
 ```
-git clone https://github.com/BPA-CSIRO-Workshops/btp-workshop-ngs.git
-```
-
-<!-- WORKSHOP DYNAMIC -->
-Pull the training submodules
-```
-cd btp-workshop-ngs
-git submodule update --init --recursive
+git clone --recursive https://github.com/BPA-CSIRO-Workshops/btp-workshop-ngs.git
 ```
 
 Build the VirtualBox and/or VMWare image:
@@ -131,19 +127,11 @@ It can be launched on any of the availability zones of the NeCTAR Research Cloud
 More information about the NeCTAR Research Cloud is available on its [website][nectar-rc]. 
 Information about NeCTAR availability zones is available on this [page][nectar-azs].
 
-First thing to do is to clone the BTP workshop repository. Clone the BPA-CSIRO BTP NGS Workshop repository:
+First thing to do is to clone the BTP workshop repository and its submodules. 
+Clone the BPA-CSIRO BTP NGS Workshop repository:
 <!-- WORKSHOP DYNAMIC -->
 ```
-git clone https://github.com/BPA-CSIRO-Workshops/btp-workshop-ngs.git
-```
-
-A BTP workshop is composed of a number of training modules, 
-each configured as a submodule inside the workshop repository. 
-The submodules must be pulled from GitHub as well.Pull the training modules:
-<!-- WORKSHOP DYNAMIC -->
-```
-cd btp-workshop-ngs
-git submodule update --init --recursive
+git clone --recursive https://github.com/BPA-CSIRO-Workshops/btp-workshop-ngs.git
 ```
 
 The next step is to source the NeCTAR OpenStack credentials file. 
@@ -177,9 +165,9 @@ AWS
 ---
 
 <!-- WORKSHOP DYNAMIC -->
-Clone the BPA-CSIRO BTP NGS workshop repository:
+Clone the BPA-CSIRO BTP NGS workshop repository and its submodules:
 ```
-git clone https://github.com/BPA-CSIRO-Workshops/btp-workshop-ngs.git
+git clone --recursive https://github.com/BPA-CSIRO-Workshops/btp-workshop-ngs.git
 ```
 
 <!-- WORKSHOP DYNAMIC -->
@@ -233,15 +221,9 @@ To get the `heat` template, the BTP workshop repository and its submodules
 must be cloned from GitHub first:
 
 <!-- WORKSHOP DYNAMIC -->
-Clone the BPA-CSIRO BTP NGS workshop repository:
+Clone the BPA-CSIRO BTP NGS workshop repository and its submodules:
 ```
-git clone https://github.com/BPA-CSIRO-Workshops/btp-workshop-ngs.git
-```
-<!-- WORKSHOP DYNAMIC -->
-Pull the training submodules
-```
-cd btp-workshop-ngs
-git submodule update --init --recursive
+git clone --recursive https://github.com/BPA-CSIRO-Workshops/btp-workshop-ngs.git
 ```
 
 Then the user can login to the dashboard:
@@ -358,16 +340,11 @@ The BTP workshop repository and its submodules must be cloned first from GitHub
 to get the `cloudformation` template:
 
 <!-- WORKSHOP DYNAMIC -->
-Clone the BPA-CSIRO BTP NGS workshop repository:
+Clone the BPA-CSIRO BTP NGS workshop repository and its submodules:
 ```
-git clone https://github.com/BPA-CSIRO-Workshops/btp-workshop-ngs.git
+git clone --recursive https://github.com/BPA-CSIRO-Workshops/btp-workshop-ngs.git
 ```
-<!-- WORKSHOP DYNAMIC -->
-Pull the training submodules
-```
-cd btp-workshop-ngs
-git submodule update --init --recursive
-```
+
 Then the user can login to the console:
 
 ![AWS Console 01][aws-cs-01]
