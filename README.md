@@ -31,7 +31,7 @@ Prerequisites
 
 Packer
 ------
-In order to build the images using the recipes, Packer must be installed on the client machine. Packer packages are available for most platforms (Windows, Linux and OS X) and can be downloaded from the [Packer website][packer]. Once installed, the `packer` command line tool will be available on the system.
+In order to build the images using the recipes, Packer must be installed on the client machine. Packer packages are available for most platforms (Windows, Linux and OS X) and can be downloaded from the [Packer website](https://www.packer.io/downloads.html). Once installed, the `packer` command line tool will be available on the system.
 
 VirtualBox
 ----------
