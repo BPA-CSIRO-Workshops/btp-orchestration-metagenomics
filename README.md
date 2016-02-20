@@ -325,43 +325,43 @@ Accessing BTP Instances
 
 The recommended way for accessing the BTP instances is via remote desktop. NoMachine is configured on the BTP images and remote desktop access is done using `NX` protocol. Once NoMachine is installed on the client machine, it can then be launched to start the connection to the BTP instance:
 
-![NX 01][nx-01]
+![NX 01](https://raw.githubusercontent.com/BPA-CSIRO-Workshops/btp-orchestration/master/images/nx-01.png)
 
 After clicking on `New` button, the new connection configuration is initiated:
 
-![NX 02][nx-02]
+![NX 02](https://raw.githubusercontent.com/BPA-CSIRO-Workshops/btp-orchestration/master/images/nx-02.png)
 
 `NX` protocol must chosen for the remote desktop connection, then click on `Continue` to go to the next panel:
 
-![NX 03][nx-03]
+![NX 03](https://raw.githubusercontent.com/BPA-CSIRO-Workshops/btp-orchestration/master/images/nx-03.png)
 
 The BTP instance's IP address is then entered into `Host` field, using the default `NX` port `4000` as is, then click on `Continue` to go the next panel:
 
-![NX 04][nx-04]
+![NX 04](https://raw.githubusercontent.com/BPA-CSIRO-Workshops/btp-orchestration/master/images/nx-04.png)
 
 For the authentication method, `Password` is then chosen as the `Trainee Password` will be used to connect to the BTP instance. Once the password has been entered, the `Continue` button can then be clicked to advance to the next panel:
 
-![NX 05][nx-05]
+![NX 05](https://raw.githubusercontent.com/BPA-CSIRO-Workshops/btp-orchestration/master/images/nx-05.png)
 
 The BTP instance will be access directly network-wise, so the `Don't use a proxy` option is chosen, then click on the `Continue` button to advance to the last configuration panel:
 
-![NX 06][nx-06]
+![NX 06](https://raw.githubusercontent.com/BPA-CSIRO-Workshops/btp-orchestration/master/images/nx-06.png)
 
 The connection can then be named on the last panel. After a suitable name has been entered, the `Done` button can be clicked to get back to the main connections page:
 
-![NX 07][nx-07]
+![NX 07](https://raw.githubusercontent.com/BPA-CSIRO-Workshops/btp-orchestration/master/images/nx-07.png)
 
 By choosing on the now saved connection and clicking on the `Connect` button, the connection will commence. Once connection to the BTP instance is estabilished, the login prompt will be presented:
 
-![NX 08][nx-08]
+![NX 08](https://raw.githubusercontent.com/BPA-CSIRO-Workshops/btp-orchestration/master/images/nx-08.png)
 
 The username configured for the workshop will be `trainee` and the password will be the one entered for the `Trainee Password` paramater upon launch of the `heat` template on the NeCTAR Research Cloud orchestration service. Once the username and password information has been entered, the `OK` button can be clicked to open the remote desktop session:
 
-![NX 09][nx-09]
+![NX 09](https://raw.githubusercontent.com/BPA-CSIRO-Workshops/btp-orchestration/master/images/nx-09.png)
 
 Now the BTP instance can be used just like a normal desktop environment. Applications and analysis tools can be used and launched just like from a normal desktop:
 
-![NX 10](images/nx-10.png?raw=true "NX 10")
+![NX 10](https://raw.githubusercontent.com/BPA-CSIRO-Workshops/btp-orchestration/master/images/nx-10.png)
 
 License
 =======
