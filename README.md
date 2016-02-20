@@ -6,22 +6,23 @@ Table of Contents
 =================
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+BTP Orchstration
 
 - [Prerequisites](#prerequisites)
   - [Packer](#packer)
   - [VirtualBox](#virtualbox)
   - [VMWare](#vmware)
   - [NeCTAR Credentials](#nectar-credentials)
+  - [OpenStack Clients](#openstack-clients)
   - [AWS Credentials](#aws-credentials)
+  - [NoMachine](#nomachine)
 - [Creating BTP Images](#creating-btp-images)
   - [VirtualBox and VMWare](#virtualbox-and-vmware)
   - [NeCTAR](#nectar)
   - [AWS](#aws)
 - [Launching BTP Instances](#launching-btp-instances)
-  - [VirtualBox and VMWare](#virtualbox-and-vmware-1)
-  - [NeCTAR](#nectar-1)
   - [AWS](#aws-1)
+- [Accessing BTP Instances](#accessing-btp-instances)
 - [License](#license)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
