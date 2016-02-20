@@ -127,8 +127,7 @@ It can be launched on any of the availability zones of the NeCTAR Research Cloud
 More information about the NeCTAR Research Cloud is available on its [website][nectar-rc]. 
 Information about NeCTAR availability zones is available on this [page][nectar-azs].
 
-First thing to do is to clone the BTP workshop repository and its submodules. 
-Clone the BPA-CSIRO BTP NGS Workshop repository:
+First thing to do is to clone the BTP workshop repository and its submodules:
 <!-- WORKSHOP DYNAMIC -->
 ```
 git clone --recursive https://github.com/BPA-CSIRO-Workshops/btp-workshop-ngs.git
