@@ -21,6 +21,8 @@ BTP Orchstration
   - [NeCTAR](#nectar)
   - [AWS](#aws)
 - [Launching BTP Instances](#launching-btp-instances)
+  - [VirtualBox and VMWare](#virtualbox-and-vmware-1)
+  - [NeCTAR](#nectar-1)
   - [AWS](#aws-1)
 - [Accessing BTP Instances](#accessing-btp-instances)
 - [License](#license)
@@ -203,17 +205,18 @@ Launching BTP Instances
 =======================
 This section outlines the steps to launch BTP instances on the various environments.
 
-<!-- WORKSHOP DYNAMIC -->
 VirtualBox and VMWare
 ---------------------
+
+<!-- WORKSHOP DYNAMIC -->
 The VirtualBox and VMWare images are available for download from the BTP workshop 
 [release page][btp-ngs-release]. Once the image is downloaded,
 it can be loaded into VirtualBox and VMWare.
 
-<!-- WORKSHOP DYNAMIC -->
 NeCTAR
 ------
 
+<!-- WORKSHOP DYNAMIC -->
 Included in this repository is a `heat` template (`ngs-cfn.yaml`) that can be used 
 on NeCTAR Research Cloud's [orchestration][nectar-rc-heat] service. The `heat` template 
 (`ngs-cfn.yaml`) can be used directly on the [NeCTAR Dashboard][nectar-dashboard]. 
