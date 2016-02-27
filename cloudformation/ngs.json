@@ -152,7 +152,12 @@
           "IpProtocol" : "tcp",
           "FromPort" : "4000",
           "ToPort" : "4000",
-          "CidrIp" : { "Ref" : "NX"} }
+          "CidrIp" : { "Ref" : "SSHLocation"} 
+        }, {
+          "IpProtocol" : "udp",
+          "FromPort" : "4738",
+          "ToPort" : "4738",
+          "CidrIp" : { "Ref" : "SSHLocation"} }
         ]
       }
     }
