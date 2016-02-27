@@ -148,7 +148,12 @@
           "FromPort" : "22",
           "ToPort" : "22",
           "CidrIp" : { "Ref" : "SSHLocation"}
-        } ]
+        }, {
+          "IpProtocol" : "tcp",
+          "FromPort" : "4000",
+          "ToPort" : "4000",
+          "CidrIp" : { "Ref" : "NX"} }
+        ]
       }
     }
   },
