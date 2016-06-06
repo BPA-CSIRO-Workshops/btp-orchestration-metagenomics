@@ -1,19 +1,10 @@
 #!/bin/bash
 
-# Desktop
-apt-get update
-apt-get install -y ubuntu-desktop
-/bin/sed -i 's/^PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config
-
 # NX
 cd /tmp
-wget -4 --no-check-certificate https://swift.rc.nectar.org.au:8888/v1/AUTH_809/NX/nomachine_5.0.63_1_amd64.deb
-dpkg -i nomachine_5.0.63_1_amd64.deb
-rm nomachine_5.0.63_1_amd64.deb
-
-# cloud-init
-echo 'datasource_list: [ Ec2 ]' | tee /etc/cloud/cloud.cfg.d/btp.cfg
-dpkg-reconfigure -f noninteractive cloud-init
+wget -4 --no-check-certificate https://swift.rc.nectar.org.au:8888/v1/AUTH_809/NX/nomachine_5.1.26_1_amd64.deb -O /tmp/nomachine_5.1.26_1_amd64.deb
+dpkg -i /tmp/nomachine_5.1.26_1_amd64.deb
+rm /tmp/nomachine_5.1.26_1_amd64.deb
 
 # Empty log files on the VM
 find /var/log -type f -execdir truncate -s0 {} \;
@@ -21,8 +12,8 @@ find /var/log -type f -execdir truncate -s0 {} \;
 # Disable LTS Upgrade Notification
 sed -i 's/Prompt=lts/Prompt=never/g' /etc/update-manager/release-upgrades
 
-# Seed
-usermod -p $(openssl rand -base64 12) ubuntu
+# SSHD 
+/bin/sed -i 's/^PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config
 
 # Clean apt
 apt-get -y clean all
