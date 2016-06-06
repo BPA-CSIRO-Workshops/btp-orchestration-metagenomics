@@ -4,7 +4,7 @@
       "type": "virtualbox-iso",
       "guest_os_type": "Ubuntu_64",
       "vm_name": "BTP-{{isotime \"20060102\"}}",
-      "http_directory": "preseed",
+      "http_directory": "precise",
       "iso_url": "http://releases.ubuntu.com/14.04/ubuntu-14.04.4-server-amd64.iso",
       "iso_checksum": "2ac1f3e0de626e54d05065d6f549fa3a",
       "iso_checksum_type": "md5",
@@ -18,10 +18,10 @@
       "headless": "false",
       "boot_command": [
         "<esc><esc><enter><wait>",
-        "/install/vmlinuz noapic ",
-        "preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg ",
+        "/install/vmlinuz ",
+        "preseed/url=http://{{.HTTPIP}}:{{.HTTPPort}}/preseed.cfg ",
         "debian-installer=en_US auto locale=en_US kbd-chooser/method=us ",
-        "hostname={{ .Name }} ",
+        "hostname={{.Name}} ",
         "fb=false debconf/frontend=noninteractive ",
         "keyboard-configuration/modelcode=SKIP keyboard-configuration/layout=USA ",
         "keyboard-configuration/variant=USA console-setup/ask_detect=false ",
@@ -40,9 +40,7 @@
       "scripts": [
         "provisioners/preflight.sh",
         "provisioners/guest-additions.sh",
-        "provisioners/dependencies.sh",
-        "provisioners/tools.sh",
-        "provisioners/datasets.sh",
+        "provisioners/desktop.sh",
         "provisioners/postflight.sh"
       ],
       "pause_before": "10s",
@@ -54,8 +52,7 @@
     }, {
       "type": "shell",
       "inline": [
-        "echo -e 'trainee:trainee' | chpasswd",
-        "chown trainee.trainee /mnt/workshop -R"
+        "echo -e 'ubuntu:ubuntu' | chpasswd"
       ],
       "override": {
         "virtualbox-iso": {

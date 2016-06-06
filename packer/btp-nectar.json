@@ -1,8 +1,8 @@
 {
-  "description": "BTP Image Deployment for QEMU",
+  "description": "BTP Image Deployment for NeCTAR",
   "builders": [{
     "type": "openstack",
-    "image_name": "BTP-{{isotime \"2006-01-02\"}}",
+    "image_name": "BTP-{{isotime \"20060102\"}}",
     "source_image": "c395c528-fb43-4066-9536-cf5c5efe806d",
     "flavor": "m1.small",
     "ssh_username": "ubuntu",
@@ -17,9 +17,23 @@
         "provisioners/preflight.sh",
         "provisioners/dependencies.sh",
         "provisioners/tools.sh",
+        "provisioners/cloud-init.sh",
+        "provisioners/desktop.sh",
+        "provisioners/nx.sh",
         "provisioners/postflight.sh"
         ],
       "pause_before": "10s",
+      "override": {
+        "openstack": {
+          "execute_command": "sudo bash {{.Path}}"
+        }
+      }
+    }, {
+      "type": "shell",
+      "inline": [
+        "passwd -d trainee",
+        "passwd -d ubuntu"
+       ],
       "override": {
         "openstack": {
           "execute_command": "sudo bash {{.Path}}"
