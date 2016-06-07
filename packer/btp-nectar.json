@@ -3,7 +3,7 @@
   "builders": [{
     "type": "openstack",
     "image_name": "BTP-{{isotime \"20060102\"}}",
-    "source_image": "c395c528-fb43-4066-9536-cf5c5efe806d",
+    "source_image": "c8663e68-921c-4e0a-9048-d9e042a4b41f",
     "flavor": "m1.small",
     "ssh_username": "ubuntu",
     "ssh_port": 22,
@@ -17,7 +17,6 @@
         "provisioners/preflight.sh",
         "provisioners/dependencies.sh",
         "provisioners/tools.sh",
-        "provisioners/cloud-init.sh",
         "provisioners/desktop.sh",
         "provisioners/nx.sh",
         "provisioners/postflight.sh"
@@ -33,7 +32,7 @@
       "inline": [
         "passwd -d trainee",
         "passwd -d ubuntu"
-       ],
+      ],
       "override": {
         "openstack": {
           "execute_command": "sudo bash {{.Path}}"
