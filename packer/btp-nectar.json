@@ -30,7 +30,6 @@
     }, {
       "type": "shell",
       "inline": [
-        "passwd -d trainee",
         "passwd -d ubuntu"
       ],
       "override": {
