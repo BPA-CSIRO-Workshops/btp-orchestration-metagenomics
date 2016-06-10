@@ -56,6 +56,10 @@ gsettings set org.gnome.desktop.background picture-uri "file:///usr/share/backgr
 gsettings set org.gnome.desktop.lockdown disable-lock-screen true
 gsettings set org.gnome.desktop.session idle-delay 0
 gsettings set org.gnome.desktop.background show-desktop-icons true
+gsettings set org.gnome.desktop.wm.preferences button-layout ":minimize,maximize,close"
+gsettings set org.gnome.shell.overrides button-layout ":minimize,maximize,close"
+gsettings set org.gnome.login-screen disable-restart-buttons true
+gsettings set org.gnome.shell enabled-extensions "['window-list@gnome-shell-extensions.gcampax.github.com']"
 EOF
 fi
 
