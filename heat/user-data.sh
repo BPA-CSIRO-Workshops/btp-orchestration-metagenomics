@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # Change this for your workshop repo:
-workshop_repo="https://github.com/BPA-CSIRO-Workshops/btp-workshop-ngs.git"
+workshop_repo="https://github.com/tsonika/NGS_intro_monash2016.git"
 
 # Change this:
-trainee_password="trainee"
+trainee_password="monashngs2016"
 
 # Checkout workshop repo:
 if [ ! -e "/tmp/btp-workshop" ]; then
@@ -44,6 +44,8 @@ if [ ! -f "/etc/profile.d/gsettings.sh" ]; then
 /usr/bin/gsettings set org.gnome.shell.overrides button-layout ":minimize,maximize,close"
 /usr/bin/gsettings set org.gnome.login-screen disable-restart-buttons true
 /usr/bin/gsettings set org.gnome.shell enabled-extensions "['window-list@gnome-shell-extensions.gcampax.github.com']"
+/usr/bin/gsettings set org.gnome.settings-daemon.plugins.remote-display active false
+/usr/bin/gsettings set org.gnome.desktop.interface enable-animations false
 EOF
   chmod a+x /etc/profile.d/gsettings.sh
 fi
