@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # Change this for your workshop repo:
-workshop_repo="https://github.com/tsonika/NGS_intro_monash2016.git"
+workshop_repo="https://github.com/BPA-CSIRO-Workshops/btp-workshop-metagenomics.git"
 
 # Change this:
-trainee_password="monashngs2016"
+trainee_password="trainee"
 
 # Checkout workshop repo:
 if [ ! -e "/tmp/btp-workshop" ]; then
